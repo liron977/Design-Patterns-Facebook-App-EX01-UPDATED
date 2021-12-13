@@ -7,19 +7,24 @@ namespace BasicFacebookFeatures
 {
     internal partial class FormMain : Form
     {
-        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
+
+        //private readonly LoginFacade r_LoginFacade; 
+        private FacebookAppManager m_AppManager =FacebookAppManager.Instance;
+
         private const string k_MessageCantLogin = "Cant login";
 
         public FormMain()
         {
             InitializeComponent();
             FacebookWrapper.FacebookService.s_CollectionLimit = 100;
+           // r_LoginFacade = new LoginFacade();
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
             try
             {
+                // r_LoginFacade.Login();
                 m_AppManager.UserLogin();
                 this.Hide();
                 FacebookAppForm facebookApp = new FacebookAppForm();
