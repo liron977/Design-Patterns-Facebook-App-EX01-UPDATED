@@ -6,6 +6,7 @@ namespace FacebookAppLogic
     public class PostRankFormLogic
     {
         private readonly Dictionary<Post, int> r_UserPosts;
+        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         public const int k_CurrentYear = 22;
         public const int k_NumberOfMonths = 13;
         public const int k_Millennium = 2000;
@@ -13,12 +14,12 @@ namespace FacebookAppLogic
         public readonly List<Post>[] r_UserPostsOrderedByYear = new List<Post>[k_CurrentYear];
         private const string k_MessageFailedFetch = "Fetch failed. Please try again.";
 
-        public PostRankFormLogic(User i_LoggedInUser)
+        public PostRankFormLogic()
         {
             r_UserPosts = new Dictionary<Post, int>();
             initUserPostsOrderedByMonthList();
             initUserPostsOrderedByYearList();
-            initPostsList(i_LoggedInUser);
+            initPostsList();
         }
 
         private void initUserPostsOrderedByMonthList()
@@ -73,12 +74,12 @@ namespace FacebookAppLogic
             }
         }
 
-        private void initPostsList(User i_LoggedInUser)
+        private void initPostsList()
         {
             int postCreatedMonth = 0;
             int postCreatedYear = 0;
 
-            foreach(Post userPosts in i_LoggedInUser.Posts)
+            foreach(Post userPosts in m_AppManager.LoggedInUser.Posts)
             {
                 try
                 {

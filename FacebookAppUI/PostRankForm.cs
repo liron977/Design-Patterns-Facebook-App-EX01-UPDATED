@@ -10,7 +10,7 @@ namespace BasicFacebookFeatures
 {
     internal partial class PostRankForm : Form
     {
-        private PostRankFormLogic m_AppPostsRank;
+        private PostRankFormLogic m_AppPostsRank=new PostRankFormLogic();
         private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private Dictionary<Post, int> m_UserPosts;
         private const string k_ErrorMessage = "No posts to retrieve";

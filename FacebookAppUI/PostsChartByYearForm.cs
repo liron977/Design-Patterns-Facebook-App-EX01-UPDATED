@@ -31,7 +31,7 @@ namespace BasicFacebookFeatures
 
         protected override void OnShown(EventArgs e)
         {
-            m_AppPostsRank = new PostRankFormLogic(m_AppManager.LoggedInUser);
+            m_AppPostsRank = new PostRankFormLogic();
             displayedCommentsChartOrderedByYear();
         }
 

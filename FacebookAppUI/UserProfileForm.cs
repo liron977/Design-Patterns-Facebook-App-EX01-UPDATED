@@ -8,7 +8,7 @@ namespace BasicFacebookFeatures
 {
     internal partial class UserProfileForm : Form
     {
-        FacebookAppManager m_AppManager = FacebookAppManager.Instance;
+        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private const string k_MessageSomethingWrong = "Something wrong. Try later";
         private const string k_MessageNoData = "No data to show";
         private const string k_MessageStatusPosted = "Status Posted! ID";
@@ -124,7 +124,9 @@ namespace BasicFacebookFeatures
 
         private void friendsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            User user = m_AppManager.LoggedInUser;
             showSelectedFriendDetails();
+            m_AppManager.LoggedInUser = user;
         }
 
         private void showSelectedFriendDetails()
@@ -133,9 +135,12 @@ namespace BasicFacebookFeatures
             {
                 User userFriend = m_AppManager.FindSelectedFriend(friendsListBox.SelectedItem.ToString());
                 FriendProfileForm friendProfile = new FriendProfileForm();
-                friendProfile.AppManager.LoggedInUser = userFriend;
+                //friendProfile.AppManager.LoggedInUser = userFriend;
+              
+                friendProfile.r_ProfilePasade.Friend.friend = userFriend;
 
                 friendProfile.Show();
+         
             }
         }
 

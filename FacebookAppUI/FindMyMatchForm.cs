@@ -81,11 +81,11 @@ namespace BasicFacebookFeatures
             {
                 MyMatchForm myMatch = new MyMatchForm();
 
-                myMatch.MatchAppManager.m_LoggedInUser = m_FindMatch.m_LoggedInUser;
+               // myMatch.MatchAppManager.m_LoggedInUser = m_FindMatch.m_LoggedInUser;
                 User userFriend =
                     myMatch.MatchAppManager.FindSelectedFriend(recommendedMatchesListBox.SelectedItem.ToString());
-                myMatch.MatchAppManager.LoggedInUser = userFriend;
-                myMatch.UserAppManager.LoggedInUser = m_FindMatch.m_LoggedInUser;
+               // myMatch.MatchAppManager.LoggedInUser = userFriend;
+               // myMatch.UserAppManager.LoggedInUser = m_FindMatch.m_LoggedInUser;
                 myMatch.Show();
             }
         }

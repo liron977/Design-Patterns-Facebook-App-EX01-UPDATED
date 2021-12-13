@@ -6,26 +6,17 @@ namespace BasicFacebookFeatures
 {
     internal partial class FriendProfileForm : Form
     {
-        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
-
-        public FacebookAppManager AppManager
-        {
-            get
-            {
-                return m_AppManager;
-            }
-            set
-            {
-                m_AppManager = value;
-            }
-        }
+        //private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
+        public readonly ProfileFriendPasade r_ProfilePasade = new ProfileFriendPasade();
+        
+       
 
         protected override void OnShown(EventArgs e)
         {
-            FriendPicture.Load(m_AppManager.FetchPicture());
-            userBirthDay.Text = m_AppManager.FetchUserBirthday();
-            FriendName.Text = m_AppManager.FetchUserName();
-            Gender.Text = m_AppManager.FetchUserGender();
+            FriendPicture.Load(r_ProfilePasade.GetPicture());
+            userBirthDay.Text = r_ProfilePasade.GetBirthday();
+            FriendName.Text = r_ProfilePasade.GetUserName();
+            Gender.Text = r_ProfilePasade.GetGender();
         }
 
         public FriendProfileForm()

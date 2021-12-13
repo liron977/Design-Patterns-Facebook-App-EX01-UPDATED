@@ -57,7 +57,7 @@ namespace BasicFacebookFeatures
                 int.Parse(ToNumericUpDown.Value.ToString()),
                 genderSelection);
             FindMyMatchForm findMyMatchForm = new FindMyMatchForm();
-            findMyMatchForm.MyMatch.m_LoggedInUser = m_AppManager.m_LoggedInUser;
+           // findMyMatchForm.MyMatch.m_LoggedInUser = m_AppManager.m_LoggedInUser;
             foreach(Friend friend in AppManager.r_FriendsList)
             {
                 findMyMatchForm.MyMatch.r_FriendsList.Add(friend);

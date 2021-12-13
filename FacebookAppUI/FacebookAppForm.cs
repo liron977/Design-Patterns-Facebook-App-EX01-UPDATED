@@ -7,8 +7,8 @@ namespace BasicFacebookFeatures
 {
     internal partial class FacebookAppForm : Form
     {
-        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
-        private PostRankFormLogic m_AppPostsRank;
+        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;//use one of the pasade for the user name
+       // private PostRankFormLogic m_AppPostsRank;
         private const string k_MessageLogout = " are you sure you want to log out from this app?";
 
         public FacebookAppManager AppManager
@@ -37,7 +37,7 @@ namespace BasicFacebookFeatures
         {
             UserProfileForm profileForm = new UserProfileForm();
 
-            profileForm.AppManager = AppManager;
+          //  profileForm.AppManager = AppManager;
             profileForm.Show();
         }
 
@@ -45,16 +45,16 @@ namespace BasicFacebookFeatures
         {
             SelectPreferencesForm selectPreferencesForm = new SelectPreferencesForm();
 
-            selectPreferencesForm.AppManager.m_LoggedInUser = AppManager.m_LoggedInUser;
+            //selectPreferencesForm.AppManager.m_LoggedInUser = AppManager.m_LoggedInUser;
             selectPreferencesForm.Show();
         }
 
         private void postStatistics_Click(object sender, EventArgs e)
         {
-            m_AppPostsRank = new PostRankFormLogic(AppManager.LoggedInUser);
+          //  m_AppPostsRank = new PostRankFormLogic();
             PostRankForm postRankForm = new PostRankForm();
-            postRankForm.AppManager = AppManager;
-            postRankForm.AppPostsRank = m_AppPostsRank;
+            //postRankForm.AppManager = AppManager;
+            //postRankForm.AppPostsRank = m_AppPostsRank;
             postRankForm.Show();
         }
 

@@ -7,13 +7,13 @@ namespace FacebookAppLogic
     public class FindMyMatchLogic
     {
         public readonly List<Friend> r_FriendsList = new List<Friend>();
-        public User m_LoggedInUser;
+        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private const string k_MessageFailedFetch = "Fetch failed. Please try again.";
 
 
         public void FilterByGender(User.eGender i_GenderToFilter)
         {
-            foreach(User friend in m_LoggedInUser.Friends)
+            foreach(User friend in m_AppManager.LoggedInUser.Friends)
             {
                 if(friend.Gender == i_GenderToFilter)
                 {
@@ -78,7 +78,7 @@ namespace FacebookAppLogic
         {
             try
             {
-                foreach(Post postOfUser in m_LoggedInUser.Posts)
+                foreach(Post postOfUser in m_AppManager.m_LoggedInUser.Posts)
                 {
                     foreach(User friend in postOfUser.LikedBy)
                     {
