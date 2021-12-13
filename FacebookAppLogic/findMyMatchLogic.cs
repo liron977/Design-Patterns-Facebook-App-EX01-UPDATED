@@ -22,7 +22,26 @@ namespace FacebookAppLogic
                 }
             }
         }
+        public User FindSelectedFriend(string i_UserFriendName)
+        {
+            User userFriend = new User();
+            try
+            {
+                foreach (User friend in m_AppManager.LoggedInUser.Friends)
+                {
+                    if (string.Compare(friend.Name, i_UserFriendName) == 0)
+                    {
+                        userFriend = friend;
+                    }
+                }
+            }
+            catch
+            {
+                throw new Exception(k_MessageFailedFetch);
+            }
 
+            return userFriend;
+        }
         public List<Friend> FilterMyMatch(int i_FromAge, int i_ToAge, User.eGender i_GenderToFilter)
         {
             FilterByGender(i_GenderToFilter);

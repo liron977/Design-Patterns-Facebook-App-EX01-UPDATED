@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FacebookWrapper;
+using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
 {
@@ -25,6 +27,11 @@ namespace FacebookAppLogic
             return friend.FetchPicture();
         }
 
+        public int GetAge()
+        {
+            return friend.FetchUserAge();
+        }
+
         public string GetBirthday()
         {
             return friend.FetchUserBirthday();
@@ -40,7 +47,21 @@ namespace FacebookAppLogic
             return friend.FetchUserGender();
         }
 
+        public string GetLocation()
+        {
+            return friend.FetchLocation();
+        }
 
+        public List<Photo> GetPictures()
+        {
+            return friend.FetchPictures();
+        }
+
+        public List<Page> GetLikedPages()
+        {
+            return friend.FetchLikedPages();
+
+        }
 
 
 

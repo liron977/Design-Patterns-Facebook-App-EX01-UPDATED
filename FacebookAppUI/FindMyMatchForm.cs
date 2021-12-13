@@ -83,7 +83,7 @@ namespace BasicFacebookFeatures
 
                // myMatch.MatchAppManager.m_LoggedInUser = m_FindMatch.m_LoggedInUser;
                 User userFriend =
-                    myMatch.MatchAppManager.FindSelectedFriend(recommendedMatchesListBox.SelectedItem.ToString());
+                   m_FindMatch.FindSelectedFriend(recommendedMatchesListBox.SelectedItem.ToString());
                // myMatch.MatchAppManager.LoggedInUser = userFriend;
                // myMatch.UserAppManager.LoggedInUser = m_FindMatch.m_LoggedInUser;
                 myMatch.Show();
