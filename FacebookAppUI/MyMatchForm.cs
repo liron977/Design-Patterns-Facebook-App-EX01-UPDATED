@@ -9,8 +9,8 @@ namespace BasicFacebookFeatures
 {
     internal partial class MyMatchForm : Form
     {
-        private FacebookAppManager m_MatchAppManager = new FacebookAppManager();
-        private FacebookAppManager m_UserAppManager = new FacebookAppManager();
+        private FacebookAppManager m_MatchAppManager = FacebookAppManager.Instance;
+        private FacebookAppManager m_UserAppManager = FacebookAppManager.Instance;
         private List<Photo> m_Photos;
         private int m_PhotoListIndex;
         private const string k_MessageSomethingWrong = @"Something wrong. Try later";

@@ -8,7 +8,7 @@ namespace BasicFacebookFeatures
     internal partial class PostInformationForm : Form
     {
         public Post m_UserPost;
-        private FacebookAppManager m_AppManager = new FacebookAppManager();
+        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private const string k_MessageSomethingWrong = "Something wrong. Try later";
         private const string k_MessageNoData = "No data to show";
         private const string k_MessageStatusPosted = "Status Posted!";

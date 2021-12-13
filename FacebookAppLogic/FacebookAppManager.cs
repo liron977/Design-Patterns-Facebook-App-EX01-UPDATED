@@ -5,13 +5,39 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
 {
-    public class FacebookAppManager
+    public sealed class FacebookAppManager
     {
         public User m_LoggedInUser;
         private LoginResult m_LoginResult;
         private const string k_MessageFailedFetch = "Fetch failed. Please try again.";
         private const string k_MessageNoData = "No Data to retrieve";
         private const int k_RangeDaysUpcomingBirthdays = 3;
+        private static FacebookAppManager s_Instance = null;
+        private static readonly object sr_FacebookAppManagerLock = new object();
+
+        private FacebookAppManager()
+        {
+
+        }
+
+        public static FacebookAppManager Instance
+        {
+            get
+            {
+                if (s_Instance == null)
+                {
+                    lock (sr_FacebookAppManagerLock)
+                    {
+                        if (s_Instance == null)
+                        {
+                            s_Instance = new FacebookAppManager();
+                        }
+                    }
+                }
+
+                return s_Instance;
+            }
+        }
         public User LoggedInUser
         {
             get

@@ -6,7 +6,7 @@ namespace BasicFacebookFeatures
 {
     internal partial class FriendProfileForm : Form
     {
-        private FacebookAppManager m_AppManager = new FacebookAppManager();
+        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
 
         public FacebookAppManager AppManager
         {

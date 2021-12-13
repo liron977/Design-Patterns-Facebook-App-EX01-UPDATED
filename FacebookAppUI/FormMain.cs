@@ -7,7 +7,7 @@ namespace BasicFacebookFeatures
 {
     internal partial class FormMain : Form
     {
-        private FacebookAppManager m_AppManager = new FacebookAppManager();
+        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private const string k_MessageCantLogin = "Cant login";
 
         public FormMain()

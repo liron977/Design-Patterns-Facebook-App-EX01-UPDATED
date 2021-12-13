@@ -8,7 +8,7 @@ namespace BasicFacebookFeatures
     internal partial class PostsChartByMonthsForm : Form
     {
         private PostRankFormLogic m_AppPostsRank;
-        private FacebookAppManager m_AppManager = new FacebookAppManager();
+        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
 
         public PostsChartByMonthsForm()
         {

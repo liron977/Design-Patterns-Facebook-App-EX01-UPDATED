@@ -7,7 +7,7 @@ namespace BasicFacebookFeatures
 {
     internal partial class FacebookAppForm : Form
     {
-        private FacebookAppManager m_AppManager = new FacebookAppManager();
+        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private PostRankFormLogic m_AppPostsRank;
         private const string k_MessageLogout = " are you sure you want to log out from this app?";
 
