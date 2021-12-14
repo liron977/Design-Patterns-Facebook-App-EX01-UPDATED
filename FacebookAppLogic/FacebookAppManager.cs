@@ -171,9 +171,9 @@ namespace FacebookAppLogic
             }
         }
 
-        public List<string> FetchFriendsList()
+        public List<User> FetchFriendsList()
         {
-            List<string> friendsList = new List<string>();
+            List<User> friendsList = new List<User>();
 
             try
             {
@@ -181,7 +181,7 @@ namespace FacebookAppLogic
                 {
                     if(friend.Name != null)
                     {
-                        friendsList.Add(friend.Name);
+                        friendsList.Add(friend);
                     }
                 }
 
@@ -270,7 +270,7 @@ namespace FacebookAppLogic
 
             try
             {
-                foreach(Page page in m_LoggedInUser.LikedPages)
+                foreach (Page page in m_LoggedInUser.LikedPages)
                 {
                     likedPages.Add(page);
                 }
@@ -282,6 +282,8 @@ namespace FacebookAppLogic
 
             return likedPages;
         }
+
+        
 
         public User FindSelectedFriend(string i_UserFriendName)
         {

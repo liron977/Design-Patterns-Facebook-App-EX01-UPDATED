@@ -8,34 +8,34 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
 {
-    public class FriendProfileLogic
+    public class FriendLogic
     {
-        public User friend { get; set; }
+        public User Friend { get; set; }
         private const string k_MessageNoData = "No Data to retrieve";
 
         public string FetchPicture()
         {
-            return friend.PictureNormalURL;
+            return Friend.PictureNormalURL;
         }
 
         public string FetchUserBirthday()
         {
-            return friend.Birthday;
+            return Friend.Birthday;
         }
         public string FetchUserName()
         {
-            return friend.Name;
+            return Friend.Name;
         }
 
         public string FetchUserGender()
         {
-            return friend.Gender.ToString();
+            return Friend.Gender.ToString();
         }
 
         public int FetchUserAge()
         {
             int theYearToday = int.Parse(DateTime.Now.Date.Year.ToString());
-            string userYearOfBirth = friend.Birthday.Substring(6, 4);
+            string userYearOfBirth = Friend.Birthday.Substring(6, 4);
             int userYearOfBirthNumber = int.Parse(userYearOfBirth);
             int userAge = theYearToday - userYearOfBirthNumber;
 
@@ -44,7 +44,7 @@ namespace FacebookAppLogic
 
         public string FetchLocation()
         {
-            return friend.Location.Name;
+            return Friend.Location.Name;
         }
 
         public List<Photo> FetchPictures()
@@ -53,7 +53,7 @@ namespace FacebookAppLogic
 
             try
             {
-                foreach (Album album in friend.Albums)
+                foreach (Album album in Friend.Albums)
                 {
                     foreach (Photo photo in album.Photos)
                     {
@@ -76,7 +76,7 @@ namespace FacebookAppLogic
 
             try
             {
-                foreach (Page page in friend.LikedPages)
+                foreach (Page page in Friend.LikedPages)
                 {
                     likedPages.Add(page);
                 }

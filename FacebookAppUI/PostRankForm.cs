@@ -11,7 +11,7 @@ namespace BasicFacebookFeatures
     internal partial class PostRankForm : Form
     {
         private PostRankFormLogic m_AppPostsRank=new PostRankFormLogic();
-        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
+        //private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private Dictionary<Post, int> m_UserPosts;
         private const string k_ErrorMessage = "No posts to retrieve";
         private const string k_ErrorCantDisplayInfo = "Sorry we can`t displayed information on this post";
@@ -21,7 +21,7 @@ namespace BasicFacebookFeatures
             InitializeComponent();
         }
 
-        public FacebookAppManager AppManager
+      /*  public FacebookAppManager AppManager
         {
             get
             {
@@ -31,7 +31,7 @@ namespace BasicFacebookFeatures
             {
                 m_AppManager = value;
             }
-        }
+        }*/
 
         public PostRankFormLogic AppPostsRank
         {
@@ -62,13 +62,13 @@ namespace BasicFacebookFeatures
 
         private void monthsChartPosts_Click(object sender, EventArgs e)
         {
-            PostsChartByMonthsForm commentsChartByMonths = new PostsChartByMonthsForm { AppManager = AppManager };
+            PostsChartByMonthsForm commentsChartByMonths = new PostsChartByMonthsForm();
             commentsChartByMonths.Show();
         }
 
         private void yearChartPost_Click(object sender, EventArgs e)
         {
-            PostsChartByYearForm commentsChartByYear = new PostsChartByYearForm { AppManager = AppManager };
+            PostsChartByYearForm commentsChartByYear = new PostsChartByYearForm();
             commentsChartByYear.Show();
         }
 
@@ -138,7 +138,7 @@ namespace BasicFacebookFeatures
             {
                 if(postMessage.SelectedItem is Post selectedPost && selectedPost.Message != null)
                 {
-                    PostInformationForm postInformationForm = new PostInformationForm { AppManager = AppManager };
+                    PostInformationForm postInformationForm = new PostInformationForm();
                     postInformationForm.Post(selectedPost);
                     postInformationForm.Show();
                 }

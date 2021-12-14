@@ -10,14 +10,16 @@ namespace BasicFacebookFeatures
     internal partial class MyMatchForm : Form
     {
         //private FacebookAppManager m_MatchAppManager = FacebookAppManager.Instance;
-        private ProfileFriendPasade m_FriendPasade = new ProfileFriendPasade();
-        private FacebookAppManager m_UserAppManager = FacebookAppManager.Instance;
+        public FriendPacade m_FriendPacade = new FriendPacade();
+        //private FacebookAppManager m_UserAppManager = FacebookAppManager.Instance;
+        public UserProfilePacade m_UserProfilePacade = new UserProfilePacade();
+
         private List<Photo> m_Photos;
         private int m_PhotoListIndex;
         private const string k_MessageSomethingWrong = @"Something wrong. Try later";
         private const string k_MessageSentSuccessfully = "-sent successfully";
 
-        public FacebookAppManager UserAppManager
+        /*public FacebookAppManager UserAppManager
         {
             get
             {
@@ -27,7 +29,7 @@ namespace BasicFacebookFeatures
             {
                 m_UserAppManager = value;
             }
-        }
+        }*/
        /* public FacebookAppManager MatchAppManager
         {
             get
@@ -53,12 +55,12 @@ namespace BasicFacebookFeatures
 
         private void fetchMatchInfo()
         {
-            MyMatchPictureBox.Load(m_FriendPasade.GetPicture());
-            UserGenderLabel.Text = m_FriendPasade.GetGender();
-            UserAgeLabel.Text = m_FriendPasade.GetAge().ToString();
-            UserLocationLabel.Text = m_FriendPasade.GetLocation();
-            MyMatchNameLabel.Text = m_FriendPasade.GetUserName();
-            m_Photos = m_FriendPasade.GetPictures();
+            MyMatchPictureBox.Load(m_FriendPacade.GetPicture());
+            UserGenderLabel.Text = m_FriendPacade.GetGender();
+            UserAgeLabel.Text = m_FriendPacade.GetAge().ToString();
+            UserLocationLabel.Text = m_FriendPacade.GetLocation();
+            MyMatchNameLabel.Text = m_FriendPacade.GetUserName();
+            m_Photos = m_FriendPacade.GetPictures();
             fetchPhoto();
             fetchLikedPages();
         }
@@ -66,7 +68,7 @@ namespace BasicFacebookFeatures
         private void fetchLikedPages()
         {
             LikedPagesListBox.Items.Clear();
-            List<Page> likedPages = m_FriendPasade.GetLikedPages();
+            List<Page> likedPages = m_FriendPacade.GetLikedPages();
             try
             {
                 foreach(Page page in likedPages)
@@ -88,14 +90,14 @@ namespace BasicFacebookFeatures
 
         private void postButton_Click(object sender, EventArgs e)
         {
-            postAndTagFriend(m_FriendPasade.Friend.friend, FirstMoveTextBox.Text);
+            postAndTagFriend(m_FriendPacade.FriendLogic.Friend, FirstMoveTextBox.Text);
         }
 
         private void postAndTagFriend(User i_ToTagged, string i_Message)
         {
             try
             {
-                m_UserAppManager.PostAndTag(i_ToTagged, i_Message);
+                m_UserProfilePacade.PostAndTag(i_ToTagged, i_Message);
                 MessageBox.Show(i_Message + k_MessageSentSuccessfully);
             }
             catch(Exception ex)

@@ -7,7 +7,7 @@ namespace BasicFacebookFeatures
     internal partial class FriendProfileForm : Form
     {
         //private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
-        public readonly ProfileFriendPasade r_ProfilePasade = new ProfileFriendPasade();
+        public readonly FriendPacade r_ProfilePasade = new FriendPacade();
         
        
 

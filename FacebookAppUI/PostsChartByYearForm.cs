@@ -9,7 +9,7 @@ namespace BasicFacebookFeatures
     internal partial class PostsChartByYearForm : Form
     {
         public PostRankFormLogic m_AppPostsRank;
-        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
+        //private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         public const int k_Millennium = 2000;
 
         public PostsChartByYearForm()
@@ -17,7 +17,7 @@ namespace BasicFacebookFeatures
             InitializeComponent();
         }
 
-        public FacebookAppManager AppManager
+       /* public FacebookAppManager AppManager
         {
             get
             {
@@ -27,7 +27,7 @@ namespace BasicFacebookFeatures
             {
                 m_AppManager = value;
             }
-        }
+        }*/
 
         protected override void OnShown(EventArgs e)
         {

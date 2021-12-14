@@ -8,58 +8,58 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
 {
-    public class ProfileFriendPasade
+    public class FriendPacade
     {
-        public FriendProfileLogic friend = new FriendProfileLogic();
-        public FriendProfileLogic Friend
+        public FriendLogic m_FriendLogic = new FriendLogic();
+        public FriendLogic FriendLogic
         {
             get
             {
-                return friend;
+                return m_FriendLogic;
             }
             set
             {
-                friend = value;
+                m_FriendLogic = value;
             }
         }
         public string GetPicture()
         {
-            return friend.FetchPicture();
+            return m_FriendLogic.FetchPicture();
         }
 
         public int GetAge()
         {
-            return friend.FetchUserAge();
+            return m_FriendLogic.FetchUserAge();
         }
 
         public string GetBirthday()
         {
-            return friend.FetchUserBirthday();
+            return m_FriendLogic.FetchUserBirthday();
         }
 
         public string GetUserName()
         {
-            return friend.FetchUserName();
+            return m_FriendLogic.FetchUserName();
         }
 
         public string GetGender()
         {
-            return friend.FetchUserGender();
+            return m_FriendLogic.FetchUserGender();
         }
 
         public string GetLocation()
         {
-            return friend.FetchLocation();
+            return m_FriendLogic.FetchLocation();
         }
 
         public List<Photo> GetPictures()
         {
-            return friend.FetchPictures();
+            return m_FriendLogic.FetchPictures();
         }
 
         public List<Page> GetLikedPages()
         {
-            return friend.FetchLikedPages();
+            return m_FriendLogic.FetchLikedPages();
 
         }
 

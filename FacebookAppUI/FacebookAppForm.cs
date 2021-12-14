@@ -7,22 +7,12 @@ namespace BasicFacebookFeatures
 {
     internal partial class FacebookAppForm : Form
     {
-        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;//use one of the pasade for the user name
+       // private FacebookAppManager m_AppManager = FacebookAppManager.Instance;//use one of the pasade for the user name
        // private PostRankFormLogic m_AppPostsRank;
+       private UserProfilePacade m_ProfilePacade = new UserProfilePacade();
         private const string k_MessageLogout = " are you sure you want to log out from this app?";
 
-        public FacebookAppManager AppManager
-        {
-            get
-            {
-                return m_AppManager;
-            }
-            set
-            {
-                m_AppManager = value;
-            }
-        }
-
+       
         public FacebookAppForm()
         {
             InitializeComponent();
@@ -30,7 +20,7 @@ namespace BasicFacebookFeatures
 
         protected override void OnShown(EventArgs e)
         {
-            ProfilePicture.Load(AppManager.FetchPicture());
+            ProfilePicture.Load(m_ProfilePacade.GetPicture());
         }
 
         private void profilePageButton_Click(object sender, EventArgs e)
@@ -65,7 +55,7 @@ namespace BasicFacebookFeatures
 
         private void activateLogout()
         {
-            string userName = AppManager.FetchUserName();
+            string userName = m_ProfilePacade.GetUserName();
             DialogResult dialogResult = MessageBox.Show(userName + k_MessageLogout, "", MessageBoxButtons.YesNo);
 
             if(dialogResult == DialogResult.Yes)

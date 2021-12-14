@@ -8,14 +8,14 @@ namespace BasicFacebookFeatures
     internal partial class PostsChartByMonthsForm : Form
     {
         private PostRankFormLogic m_AppPostsRank;
-        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
+       // private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
 
         public PostsChartByMonthsForm()
         {
             InitializeComponent();
         }
 
-        public FacebookAppManager AppManager
+       /* public FacebookAppManager AppManager
         {
             get
             {
@@ -25,7 +25,7 @@ namespace BasicFacebookFeatures
             {
                 m_AppManager = value;
             }
-        }
+        }*/
 
         protected override void OnShown(EventArgs e)
         {
