@@ -10,7 +10,7 @@ namespace BasicFacebookFeatures
 {
     internal partial class PostRankForm : Form
     {
-        private PostRankFormLogic m_AppPostsRank=new PostRankFormLogic();
+        private PostRankFacade m_AppPostsFacade=new PostRankFacade();
         //private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private Dictionary<Post, int> m_UserPosts;
         private const string k_ErrorMessage = "No posts to retrieve";
@@ -33,23 +33,13 @@ namespace BasicFacebookFeatures
             }
         }*/
 
-        public PostRankFormLogic AppPostsRank
-        {
-            get
-            {
-                return m_AppPostsRank;
-            }
-            set
-            {
-                m_AppPostsRank = value;
-            }
-        }
+       
 
         private void displayedPostCommentsRank()
         {
             try
             {
-                Post thePopularPostByComments = m_AppPostsRank.TheMostPopularPostByComments();
+                Post thePopularPostByComments = m_AppPostsFacade.GetTheMostPopularPostByComments();
 
                 textBox1.Text = thePopularPostByComments.Message;
             }
@@ -74,7 +64,7 @@ namespace BasicFacebookFeatures
 
         protected override void OnShown(EventArgs e)
         {
-            m_UserPosts = m_AppPostsRank.UserPosts;
+            m_UserPosts = m_AppPostsFacade.GetUserPosts();
             displayedPostCommentsRank();
         }
 
@@ -85,7 +75,7 @@ namespace BasicFacebookFeatures
 
             try
             {
-                m_UserPosts = m_AppPostsRank.UserPosts;
+                m_UserPosts = m_AppPostsFacade.GetUserPosts();
                 var ascendingSort = from objDict in m_UserPosts orderby objDict.Value select objDict;
                 foreach(KeyValuePair<Post, int> kvp in ascendingSort)
                 {

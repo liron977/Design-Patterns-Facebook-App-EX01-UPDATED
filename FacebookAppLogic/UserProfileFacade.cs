@@ -8,11 +8,11 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
 {
-    public class UserProfilePacade
+    public class UserProfileFacade
     {
         private readonly FacebookAppManager r_AppManager;
 
-        public UserProfilePacade()
+        public UserProfileFacade()
         {
             r_AppManager = FacebookAppManager.Instance;
         }

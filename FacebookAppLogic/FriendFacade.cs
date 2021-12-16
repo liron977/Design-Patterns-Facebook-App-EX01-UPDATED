@@ -8,7 +8,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
 {
-    public class FriendPacade
+    public class FriendFacade
     {
         public FriendLogic m_FriendLogic = new FriendLogic();
         public FriendLogic FriendLogic

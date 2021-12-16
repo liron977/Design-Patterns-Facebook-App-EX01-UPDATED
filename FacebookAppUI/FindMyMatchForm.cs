@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookAppLogic;
 using FacebookWrapper.ObjectModel;
@@ -7,23 +8,14 @@ namespace BasicFacebookFeatures
 {
     internal partial class FindMyMatchForm : Form
     {
-        private FindMyMatchLogic m_FindMatch = new FindMyMatchLogic();
+        private MyMatchFacade m_MyMatchFacade = new MyMatchFacade();
+
         private const string k_MessageNoMatches = "No matches to retrieve";
+       
 
-        public FindMyMatchLogic MyMatch
+        public FindMyMatchForm(List<FriendLogic> i_FriendsList)
         {
-            get
-            {
-                return m_FindMatch;
-            }
-            set
-            {
-                m_FindMatch = value;
-            }
-        }
-
-        public FindMyMatchForm()
-        {
+            m_MyMatchFacade.updateMatchsList(i_FriendsList);
             InitializeComponent();
         }
 
@@ -35,11 +27,11 @@ namespace BasicFacebookFeatures
 
         private void fetchFan()
         {
-            if(m_FindMatch.r_FriendsList.Count > 0)
+            if(m_MyMatchFacade.GetMyMatchs().Count > 0)
             {
                 try
                 {
-                    User myFan = m_FindMatch.FindMyFan();
+                    User myFan = m_MyMatchFacade.GetMyFan();
                     FriendWhoLoveMePictureBox.Load(myFan.PictureNormalURL);
                     FriendWhoLoveMeLabel.Text = myFan.Name;
                 }
@@ -54,9 +46,10 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                foreach(Friend friend in m_FindMatch.r_FriendsList)
+                foreach(string matchInfo in m_MyMatchFacade.GetMyMatchesInfo())
                 {
-                    recommendedMatchesListBox.Items.Add(friend.FriendUser);
+                    recommendedMatchesListBox.Items.Add(matchInfo);
+                  
                 }
 
                 if(recommendedMatchesListBox.Items.Count == 0)
@@ -80,11 +73,11 @@ namespace BasicFacebookFeatures
             if(recommendedMatchesListBox.SelectedItems.Count == 1)
             {
                 MyMatchForm myMatch = new MyMatchForm();
+                recommendedMatchesListBox.Items.Add(recommendedMatchesListBox.SelectedIndex);
+              //  User userFriend =recommendedMatchesListBox.SelectedItem as User;
 
-                User userFriend =recommendedMatchesListBox.SelectedItem as User;
-                
-                myMatch.m_FriendPacade.FriendLogic.Friend = userFriend;
-                myMatch.Show();
+                /// myMatch.m_FriendFacade.FriendLogic.Friend = userFriend;
+               // myMatch.Show();
             }
         }
     }

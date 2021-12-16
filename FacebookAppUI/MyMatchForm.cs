@@ -10,9 +10,9 @@ namespace BasicFacebookFeatures
     internal partial class MyMatchForm : Form
     {
         //private FacebookAppManager m_MatchAppManager = FacebookAppManager.Instance;
-        public FriendPacade m_FriendPacade = new FriendPacade();
+        public FriendFacade m_FriendFacade = new FriendFacade();
         //private FacebookAppManager m_UserAppManager = FacebookAppManager.Instance;
-        public UserProfilePacade m_UserProfilePacade = new UserProfilePacade();
+        public UserProfileFacade m_UserProfileFacade = new UserProfileFacade();
 
         private List<Photo> m_Photos;
         private int m_PhotoListIndex;
@@ -55,12 +55,12 @@ namespace BasicFacebookFeatures
 
         private void fetchMatchInfo()
         {
-            MyMatchPictureBox.Load(m_FriendPacade.GetPicture());
-            UserGenderLabel.Text = m_FriendPacade.GetGender();
-            UserAgeLabel.Text = m_FriendPacade.GetAge().ToString();
-            UserLocationLabel.Text = m_FriendPacade.GetLocation();
-            MyMatchNameLabel.Text = m_FriendPacade.GetUserName();
-            m_Photos = m_FriendPacade.GetPictures();
+            MyMatchPictureBox.Load(m_FriendFacade.GetPicture());
+            UserGenderLabel.Text = m_FriendFacade.GetGender();
+            UserAgeLabel.Text = m_FriendFacade.GetAge().ToString();
+            UserLocationLabel.Text = m_FriendFacade.GetLocation();
+            MyMatchNameLabel.Text = m_FriendFacade.GetUserName();
+            m_Photos = m_FriendFacade.GetPictures();
             fetchPhoto();
             fetchLikedPages();
         }
@@ -68,7 +68,7 @@ namespace BasicFacebookFeatures
         private void fetchLikedPages()
         {
             LikedPagesListBox.Items.Clear();
-            List<Page> likedPages = m_FriendPacade.GetLikedPages();
+            List<Page> likedPages = m_FriendFacade.GetLikedPages();
             try
             {
                 foreach(Page page in likedPages)
@@ -90,14 +90,14 @@ namespace BasicFacebookFeatures
 
         private void postButton_Click(object sender, EventArgs e)
         {
-            postAndTagFriend(m_FriendPacade.FriendLogic.Friend, FirstMoveTextBox.Text);
+            postAndTagFriend(m_FriendFacade.FriendLogic.Friend, FirstMoveTextBox.Text);
         }
 
         private void postAndTagFriend(User i_ToTagged, string i_Message)
         {
             try
             {
-                m_UserProfilePacade.PostAndTag(i_ToTagged, i_Message);
+                m_UserProfileFacade.PostAndTag(i_ToTagged, i_Message);
                 MessageBox.Show(i_Message + k_MessageSentSuccessfully);
             }
             catch(Exception ex)

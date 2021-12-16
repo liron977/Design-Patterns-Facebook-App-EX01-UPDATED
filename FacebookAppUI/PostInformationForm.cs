@@ -9,7 +9,7 @@ namespace BasicFacebookFeatures
     {
         public Post m_UserPost;
         //private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
-        private UserProfilePacade m_ProfilePacade = new UserProfilePacade();
+        private UserProfileFacade m_ProfileFacade = new UserProfileFacade();
         private const string k_MessageSomethingWrong = "Something wrong. Try later";
         private const string k_MessageNoData = "No data to show";
         private const string k_MessageStatusPosted = "Status Posted!";
@@ -109,7 +109,7 @@ namespace BasicFacebookFeatures
             {
                 if(!(string.IsNullOrEmpty(postTextBox.Text)))
                 {
-                    Status postedStatus = m_ProfilePacade.PostStatus(postTextBox.Text);
+                    Status postedStatus = m_ProfileFacade.PostStatus(postTextBox.Text);
                     MessageBox.Show(k_MessageStatusPosted);
                 }
                 else

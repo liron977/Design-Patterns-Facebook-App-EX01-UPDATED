@@ -1,37 +1,58 @@
 ﻿using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
+using System.Net;
 
 namespace FacebookAppLogic
 {
     public class FindMyMatchLogic
     {
-        public readonly List<Friend> r_FriendsList = new List<Friend>();
+        public readonly List<FriendLogic> r_FriendsList = new List<FriendLogic>();
         private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private const string k_MessageFailedFetch = "Fetch failed. Please try again.";
 
-
-        public void FilterByGender(User.eGender i_GenderToFilter)
+        public List<string> FetchMyMatchesInfo()
         {
-            foreach(User friend in m_AppManager.LoggedInUser.Friends)
+
+            List<string> matchesByFormat = new List<string>();
+
+            foreach (FriendLogic friend in r_FriendsList)
             {
-                if(friend.Gender == i_GenderToFilter)
-                {
-                    Friend matchFriend = new Friend(friend);
-                    r_FriendsList.Add(matchFriend);
-                }
+                IMyMatchFormat iMatchesFormat = new MyMatchFormatAdapter(friend.Friend);
+                matchesByFormat.AddRange(iMatchesFormat.CreateFormattedMatchesList());
+
+            }
+
+            return matchesByFormat;
+        }
+
+        public int GetNameIndex(string selected_item, int selectedIndex)
+        {
+
+            switch(selected_item[0])
+            {
+                case '-':
+                    return selectedIndex - 3;
+                case 'L':
+                    return selectedIndex - 2;
+                case 'A':
+                    return selectedIndex - 1;
+                default:
+                    return selectedIndex;
             }
         }
+
+
         public User FindSelectedFriend(string i_UserFriendName)
         {
             User userFriend = new User();
             try
             {
-                foreach (User friend in m_AppManager.LoggedInUser.Friends)
+                foreach (FriendLogic friend in r_FriendsList)
                 {
-                    if (string.Compare(friend.Name, i_UserFriendName) == 0)
+                    if (string.Compare(friend.Friend.Name, i_UserFriendName) == 0)
                     {
-                        userFriend = friend;
+                        userFriend = friend.Friend;
                     }
                 }
             }
@@ -42,7 +63,28 @@ namespace FacebookAppLogic
 
             return userFriend;
         }
-        public List<Friend> FilterMyMatch(int i_FromAge, int i_ToAge, User.eGender i_GenderToFilter)
+        public void UpdateFriendList(List<FriendLogic> i_FriendsList)
+        {
+
+            foreach (FriendLogic friend in i_FriendsList)
+            {
+                r_FriendsList.Add(friend);
+            }
+        }
+        public void FilterByGender(User.eGender i_GenderToFilter)
+        {
+            foreach(User friend in m_AppManager.LoggedInUser.Friends)
+            {
+                if(friend.Gender == i_GenderToFilter)
+                {
+                    FriendLogic matchFriend = new FriendLogic();
+                    matchFriend.Friend = friend;
+                    r_FriendsList.Add(matchFriend);
+                }
+            }
+        }
+        
+        public List<FriendLogic> FilterMyMatch(int i_FromAge, int i_ToAge, User.eGender i_GenderToFilter)
         {
             FilterByGender(i_GenderToFilter);
             filterByAge(i_FromAge, i_ToAge);
@@ -55,10 +97,10 @@ namespace FacebookAppLogic
         {
             try
             {
-                foreach(Friend friend in r_FriendsList)
+                foreach(FriendLogic friend in r_FriendsList)
                 {
-                    if(friend.FriendUser.RelationshipStatus != User.eRelationshipStatus.Single
-                       && friend.FriendUser.RelationshipStatus != User.eRelationshipStatus.None)
+                    if(friend.Friend.RelationshipStatus != User.eRelationshipStatus.Single
+                       && friend.Friend.RelationshipStatus != User.eRelationshipStatus.None)
                     {
                         r_FriendsList.Remove(friend);
                     }
@@ -72,12 +114,13 @@ namespace FacebookAppLogic
 
         public User FindMyFan()
         {
-            Friend fan = r_FriendsList[0];
+            FriendLogic fan=new FriendLogic();
+                fan.Friend= r_FriendsList[0].Friend;
 
             updateLikesPerFriend();
             try
             {
-                foreach(Friend friend in r_FriendsList)
+                foreach(FriendLogic friend in r_FriendsList)
                 {
                     if(friend.NumOfLikes > fan.NumOfLikes)
                     {
@@ -90,7 +133,7 @@ namespace FacebookAppLogic
                 throw new Exception(k_MessageFailedFetch);
             }
 
-            return fan.FriendUser;
+            return fan.Friend;
         }
 
         private void updateLikesPerFriend()
@@ -101,7 +144,7 @@ namespace FacebookAppLogic
                 {
                     foreach(User friend in postOfUser.LikedBy)
                     {
-                        r_FriendsList.Find(i_FriendUser => i_FriendUser.FriendUser.Email == friend.Email).NumOfLikes++;
+                        r_FriendsList.Find(i_FriendUser => i_FriendUser.Friend.Email == friend.Email).NumOfLikes++;
                     }
                 }
             }
@@ -117,9 +160,9 @@ namespace FacebookAppLogic
 
             try
             {
-                foreach(Friend friend in r_FriendsList)
+                foreach(FriendLogic friend in r_FriendsList)
                 {
-                    string friendYearOfBirth = friend.FriendUser.Birthday.Substring(6, 4);
+                    string friendYearOfBirth = friend.Friend.Birthday.Substring(6, 4);
                     int friendYearOfBirthNumber = int.Parse(friendYearOfBirth);
                     int friendAge = theYearToday - friendYearOfBirthNumber;
 

@@ -7,20 +7,9 @@ namespace BasicFacebookFeatures
 {
     internal partial class SelectPreferencesForm : Form
     {
-        private FindMyMatchLogic m_AppManager = new FindMyMatchLogic();
+        private MyMatchFacade m_MyMatchFacade = new MyMatchFacade();
         private const string k_ErrorMessageAgeRange = "The range you entered is not possible";
 
-        public FindMyMatchLogic AppManager
-        {
-            get
-            {
-                return m_AppManager;
-            }
-            set
-            {
-                m_AppManager = value;
-            }
-        }
 
         public SelectPreferencesForm()
         {
@@ -52,16 +41,17 @@ namespace BasicFacebookFeatures
                 genderSelection = User.eGender.male;
             }
 
-            m_AppManager.FilterMyMatch(
+            m_MyMatchFacade.FilterMyMatch(
                 int.Parse(FromNumericUpDown.Value.ToString()),
                 int.Parse(ToNumericUpDown.Value.ToString()),
                 genderSelection);
-            FindMyMatchForm findMyMatchForm = new FindMyMatchForm();
-           // findMyMatchForm.MyMatch.m_LoggedInUser = m_AppManager.m_LoggedInUser;
-            foreach(Friend friend in AppManager.r_FriendsList)
+            FindMyMatchForm findMyMatchForm = new FindMyMatchForm(m_MyMatchFacade.GetMyMatchs());
+         
+          /*
+            foreach(FriendLogic friend in m_MyMatchFacade.GetMyMatchs())
             {
-                findMyMatchForm.MyMatch.r_FriendsList.Add(friend);
-            }
+                findMyMatchForm.m_MyMatchFacade.GetMyMatchs().Add(friend);
+            }*/
 
             this.Close();
             findMyMatchForm.Show();

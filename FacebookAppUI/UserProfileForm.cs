@@ -8,26 +8,14 @@ namespace BasicFacebookFeatures
 {
     internal partial class UserProfileForm : Form
     {
-        //private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
-        private UserProfilePacade m_ProfilePacade = new UserProfilePacade();
-        //private FriendPacade m_FriendPacade = new FriendPacade();
+      
+        private UserProfileFacade m_ProfileFacade = new UserProfileFacade();
 
         private const string k_MessageSomethingWrong = "Something wrong. Try later";
         private const string k_MessageNoData = "No data to show";
         private const string k_MessageStatusPosted = "Status Posted! ID";
         private const string k_MessageErrorBirthday = @"None of your friends has birthday in the next 3 days";
 
-       /* public FacebookAppManager AppManager
-        {
-            get
-            {
-                return m_AppManager;
-            }
-            set
-            {
-                m_AppManager = value;
-            }
-        }*/
 
         public UserProfileForm()
         {
@@ -36,7 +24,7 @@ namespace BasicFacebookFeatures
 
         protected override void OnShown(EventArgs e)
         {
-            ProfilePicture.Load(m_ProfilePacade.GetPicture());
+            ProfilePicture.Load(m_ProfileFacade.GetPicture());
             fetchNewsFeed();
             fetchFriends();
             fetchUpcomingBirthdays();
@@ -54,7 +42,7 @@ namespace BasicFacebookFeatures
                 }
                 else
                 {
-                    List<string> friendList = m_ProfilePacade.GetUpcomingBirthdays();
+                    List<string> friendList = m_ProfileFacade.GetUpcomingBirthdays();
 
                     foreach(string friendUser in friendList)
                     {
@@ -83,7 +71,7 @@ namespace BasicFacebookFeatures
                 }
                 else
                 {
-                    List<User> friendList = m_ProfilePacade.GetFriends();
+                    List<User> friendList = m_ProfileFacade.GetFriends();
 
                     foreach(User friendUser in friendList)
                     {
@@ -107,7 +95,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                List<string> userPosts = m_ProfilePacade.GetNewsFeed();
+                List<string> userPosts = m_ProfileFacade.GetNewsFeed();
 
                 foreach(string post in userPosts)
                 {
@@ -140,7 +128,7 @@ namespace BasicFacebookFeatures
                 FriendProfileForm friendProfile = new FriendProfileForm();
                 //friendProfile.AppManager.LoggedInUser = userFriend;
               
-                friendProfile.r_ProfilePasade.FriendLogic.Friend = userFriend;
+                friendProfile.r_ProfileFacade.FriendLogic.Friend = userFriend;
 
                 friendProfile.Show();
          
@@ -151,7 +139,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                List<Album> userAlbums = m_ProfilePacade.GetAlbums();
+                List<Album> userAlbums = m_ProfileFacade.GetAlbums();
 
                 foreach(Album album in userAlbums)
                 {
@@ -192,7 +180,7 @@ namespace BasicFacebookFeatures
             {
                 if(!(string.IsNullOrEmpty(PostStatusTextBox.Text)))
                 {
-                    Status postedStatus = m_ProfilePacade.PostStatus(PostStatusTextBox.Text);
+                    Status postedStatus = m_ProfileFacade.PostStatus(PostStatusTextBox.Text);
                     MessageBox.Show(k_MessageStatusPosted);
                 }
                 else

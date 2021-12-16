@@ -40,13 +40,15 @@
   <ItemGroup>
     <Compile Include="FacebookAppManager.cs" />
     <Compile Include="FindMyMatchLogic.cs" />
-    <Compile Include="Friend.cs" />
     <Compile Include="FriendLogic.cs" />
+    <Compile Include="IMyMatchFormat.cs" />
     <Compile Include="LoginFacade.cs" />
+    <Compile Include="MyMatchFormatAdapter.cs" />
     <Compile Include="MyMatchFacade.cs" />
+    <Compile Include="PostRankFacade.cs" />
     <Compile Include="PostRankFormLogic.cs" />
-    <Compile Include="FriendPacade.cs" />
-    <Compile Include="UserProfilePacade.cs" />
+    <Compile Include="FriendFacade.cs" />
+    <Compile Include="UserProfileFacade.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Facebook">

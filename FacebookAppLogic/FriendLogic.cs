@@ -12,7 +12,13 @@ namespace FacebookAppLogic
     {
         public User Friend { get; set; }
         private const string k_MessageNoData = "No Data to retrieve";
+        public int NumOfLikes { get; set; }
 
+        public FriendLogic()
+        {
+            
+            NumOfLikes = 0;
+        }
         public string FetchPicture()
         {
             return Friend.PictureNormalURL;

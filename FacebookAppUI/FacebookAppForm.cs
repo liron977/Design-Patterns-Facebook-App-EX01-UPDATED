@@ -9,7 +9,7 @@ namespace BasicFacebookFeatures
     {
        // private FacebookAppManager m_AppManager = FacebookAppManager.Instance;//use one of the pasade for the user name
        // private PostRankFormLogic m_AppPostsRank;
-       private UserProfilePacade m_ProfilePacade = new UserProfilePacade();
+       private UserProfileFacade m_ProfileFacade = new UserProfileFacade();
         private const string k_MessageLogout = " are you sure you want to log out from this app?";
 
        
@@ -20,7 +20,7 @@ namespace BasicFacebookFeatures
 
         protected override void OnShown(EventArgs e)
         {
-            ProfilePicture.Load(m_ProfilePacade.GetPicture());
+            ProfilePicture.Load(m_ProfileFacade.GetPicture());
         }
 
         private void profilePageButton_Click(object sender, EventArgs e)
@@ -55,7 +55,7 @@ namespace BasicFacebookFeatures
 
         private void activateLogout()
         {
-            string userName = m_ProfilePacade.GetUserName();
+            string userName = m_ProfileFacade.GetUserName();
             DialogResult dialogResult = MessageBox.Show(userName + k_MessageLogout, "", MessageBoxButtons.YesNo);
 
             if(dialogResult == DialogResult.Yes)
