@@ -73,11 +73,15 @@ namespace BasicFacebookFeatures
             if(recommendedMatchesListBox.SelectedItems.Count == 1)
             {
                 MyMatchForm myMatch = new MyMatchForm();
-                recommendedMatchesListBox.Items.Add(recommendedMatchesListBox.SelectedIndex);
-              //  User userFriend =recommendedMatchesListBox.SelectedItem as User;
+                int matchNameIndex
+             //recommendedMatchesListBox.Items.Add(recommendedMatchesListBox.SelectedIndex);
+             //  User userFriend =recommendedMatchesListBox.SelectedItem as User;
+             = m_MyMatchFacade.GetSelectedMatchIndex(
+                  recommendedMatchesListBox.SelectedItem.ToString(),
+                  recommendedMatchesListBox.SelectedIndex);
 
-                /// myMatch.m_FriendFacade.FriendLogic.Friend = userFriend;
-               // myMatch.Show();
+               myMatch.m_FriendFacade.FriendLogic.Friend = m_MyMatchFacade.GetSelectedMatch(recommendedMatchesListBox.Items[matchNameIndex].ToString());
+               myMatch.Show();
             }
         }
     }

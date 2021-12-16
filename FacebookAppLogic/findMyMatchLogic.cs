@@ -46,6 +46,7 @@ namespace FacebookAppLogic
         public User FindSelectedFriend(string i_UserFriendName)
         {
             User userFriend = new User();
+            i_UserFriendName = i_UserFriendName.Substring(6);
             try
             {
                 foreach (FriendLogic friend in r_FriendsList)

@@ -36,7 +36,12 @@ namespace FacebookAppLogic
 
         public int GetSelectedMatchIndex(string selected_item, int selectedIndex)
         {
-            m_FindMyMatchLogic.ge
+            return m_FindMyMatchLogic.GetNameIndex(selected_item, selectedIndex);
+        }
+
+        public User GetSelectedMatch(string selectedMatch)
+        {
+            return m_FindMyMatchLogic.FindSelectedFriend(selectedMatch);
         }
 
 
