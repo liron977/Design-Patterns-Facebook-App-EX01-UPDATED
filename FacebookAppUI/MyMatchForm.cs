@@ -3,45 +3,20 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookAppLogic;
 using FacebookWrapper.ObjectModel;
+using System.Threading;
 
 
 namespace BasicFacebookFeatures
 {
     internal partial class MyMatchForm : Form
     {
-        //private FacebookAppManager m_MatchAppManager = FacebookAppManager.Instance;
         public FriendFacade m_FriendFacade = new FriendFacade();
-        //private FacebookAppManager m_UserAppManager = FacebookAppManager.Instance;
         public UserProfileFacade m_UserProfileFacade = new UserProfileFacade();
 
         private List<Photo> m_Photos;
         private int m_PhotoListIndex;
         private const string k_MessageSomethingWrong = @"Something wrong. Try later";
         private const string k_MessageSentSuccessfully = "-sent successfully";
-
-        /*public FacebookAppManager UserAppManager
-        {
-            get
-            {
-                return m_UserAppManager;
-            }
-            set
-            {
-                m_UserAppManager = value;
-            }
-        }*/
-       /* public FacebookAppManager MatchAppManager
-        {
-            get
-            {
-                return m_MatchAppManager;
-            }
-            set
-            {
-                m_MatchAppManager = value;
-            }
-        }*/
-
         public MyMatchForm()
         {
             InitializeComponent();
@@ -50,31 +25,42 @@ namespace BasicFacebookFeatures
 
         protected override void OnShown(EventArgs e)
         {
-            fetchMatchInfo();
+            new Thread (fetchMatchInfo).Start();
+    
         }
 
         private void fetchMatchInfo()
         {
+           
+          
             MyMatchPictureBox.Load(m_FriendFacade.GetPicture());
-            UserGenderLabel.Text = m_FriendFacade.GetGender();
-            UserAgeLabel.Text = m_FriendFacade.GetAge().ToString();
-            UserLocationLabel.Text = m_FriendFacade.GetLocation();
-            MyMatchNameLabel.Text = m_FriendFacade.GetUserName();
+            UserGenderLabel.Invoke(new Action(() => UserGenderLabel.Text = m_FriendFacade.GetGender()));
+            UserAgeLabel.Invoke(new Action(() => UserAgeLabel.Text = m_FriendFacade.GetAge().ToString()));
+            UserLocationLabel.Invoke(new Action(() => UserLocationLabel.Text = m_FriendFacade.GetLocation()));
+            MyMatchNameLabel.Invoke(new Action(() => MyMatchNameLabel.Text = m_FriendFacade.GetUserName()));
+            new Thread(fetchLikedPages).Start();
+            new Thread(fetchPictures).Start();
+          
+        }
+        private void fetchPictures()
+        {
             m_Photos = m_FriendFacade.GetPictures();
-            fetchPhoto();
-            fetchLikedPages();
+            new Thread(fetchPhoto).Start();
         }
 
         private void fetchLikedPages()
         {
-            LikedPagesListBox.Items.Clear();
+            LikedPagesListBox.Invoke(new Action(() => LikedPagesListBox.Items.Clear()));
             List<Page> likedPages = m_FriendFacade.GetLikedPages();
             try
             {
-                foreach(Page page in likedPages)
+                LikedPagesListBox.Invoke(new Action(() =>
                 {
-                    LikedPagesListBox.Items.Add(page);
-                }
+                    foreach (Page page in likedPages)
+                    {
+                        LikedPagesListBox.Items.Add(page);
+                    }
+                }));
             }
             catch(Exception ex)
             {

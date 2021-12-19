@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookAppLogic;
 using FacebookWrapper.ObjectModel;
+using System.Threading;
 
 namespace BasicFacebookFeatures
 {
@@ -21,19 +22,22 @@ namespace BasicFacebookFeatures
 
         protected override void OnShown(EventArgs e)
         {
-            fetchMatches();
-            fetchFan();
+            new Thread(fetchFan).Start();
+            //fetchFan();
+            new Thread(fetchMatches).Start();
+            
         }
 
         private void fetchFan()
         {
+            
             if(m_MyMatchFacade.GetMyMatchs().Count > 0)
             {
                 try
                 {
                     User myFan = m_MyMatchFacade.GetMyFan();
-                    FriendWhoLoveMePictureBox.Load(myFan.PictureNormalURL);
-                    FriendWhoLoveMeLabel.Text = myFan.Name;
+                    FriendWhoLoveMePictureBox.Invoke(new Action(() => FriendWhoLoveMePictureBox.Load(myFan.PictureNormalURL)));
+                    FriendWhoLoveMeLabel.Invoke(new Action(() => FriendWhoLoveMeLabel.Text = myFan.Name));
                 }
                 catch(Exception ex)
                 {
@@ -48,7 +52,7 @@ namespace BasicFacebookFeatures
             {
                 foreach(string matchInfo in m_MyMatchFacade.GetMyMatchesInfo())
                 {
-                    recommendedMatchesListBox.Items.Add(matchInfo);
+                    recommendedMatchesListBox.Invoke(new Action(() => recommendedMatchesListBox.Items.Add(matchInfo)));
                   
                 }
 
@@ -65,7 +69,7 @@ namespace BasicFacebookFeatures
 
         private void recommendedMatchesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            showSelectedFriendDetails();
+           showSelectedFriendDetails();
         }
 
         private void showSelectedFriendDetails()
@@ -74,8 +78,6 @@ namespace BasicFacebookFeatures
             {
                 MyMatchForm myMatch = new MyMatchForm();
                 int matchNameIndex
-             //recommendedMatchesListBox.Items.Add(recommendedMatchesListBox.SelectedIndex);
-             //  User userFriend =recommendedMatchesListBox.SelectedItem as User;
              = m_MyMatchFacade.GetSelectedMatchIndex(
                   recommendedMatchesListBox.SelectedItem.ToString(),
                   recommendedMatchesListBox.SelectedIndex);

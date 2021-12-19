@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading;
 
 namespace FacebookAppLogic
 {
@@ -10,6 +11,7 @@ namespace FacebookAppLogic
         public readonly List<FriendLogic> r_FriendsList = new List<FriendLogic>();
         private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private const string k_MessageFailedFetch = "Fetch failed. Please try again.";
+        private static readonly object sr_FacebookAppManagerLock = new object();
 
         public List<string> FetchMyMatchesInfo()
         {
@@ -133,7 +135,7 @@ namespace FacebookAppLogic
             {
                 throw new Exception(k_MessageFailedFetch);
             }
-
+       
             return fan.Friend;
         }
 

@@ -89,12 +89,12 @@ namespace FacebookAppLogic
             //m_LoginResult = FacebookWrapper.FacebookService.Connect(
             //"EAAMRrZBhZBBeABAAf3mGAZBSZAmq4wLITXmbz0XwHZAZCKu9IWUE1kk185K9xD2br3S8ZBvPMPqFrM7TZAGFETvMVZC1sy9cBpup8pdgiOuPiG59G2dZCIBbUl3nrIXaWQgJjjlo2wk2vmkqYptL8cxw5OprMkh3b1VpJ7ZCyj2SVhQZBT3XAmc7W0NDZBoTQkv8dj0Y3P6ZBPGdeVxWr14fkyABaG");
 
-            //m_LoginResult = FacebookWrapper.FacebookService.Connect("EAAMRrZBhZBBeABACgEZChie2ZCCgvrp8xRABOCI16YVQ59xv4mpauBuZAo701hVcPy8oAvjc56jD4BJesszvVdJZChgGuwOgSfnpwVgLxDDlRz8wHfXKmVPAyMk9RZAHPIpZAEY2Tx04aXsZAPoZCnvBDfxlJqsMFO2XAt3ZCezZCbks8x7VleqCohkG");
+            //m_LoginResult = FacebookWrapper.FacebookService.Connect("EAAMRrZBhZBBeABABaCfGQXZC7RvKG5YRsacaNfGZATvFxnQeNKBagzATVmI0o2ROLtIsZCgqnJLXR3T0ZAS0KISGnj5hkLSuEwbrLImFodqmXQsrG4rPXZCZAd10Mj3eGaIsup3wLcsJovRJaZAfZAKSf5BiPZBqqavBeyA2iEsSdKM5xs2STGU31j0wRE0yGFsaURmfgVNFuuW6Dk5y6M9uTGB");
 /*            m_LoginResult = FacebookWrapper.FacebookService.Connect(
                 "EAAMRrZBhZBBeABACgEZChie2ZCCgvrp8xRABOCI16YVQ59xv4mpauBuZAo701hVcPy8oAvjc56jD4BJesszvVdJZChgGuwOgSfnpwVgLxDDlRz8wHfXKmVPAyMk9RZAHPIpZAEY2Tx04aXsZAPoZCnvBDfxlJqsMFO2XAt3ZCezZCbks8x7VleqCohkG");*/
             m_LoggedInUser = m_LoginResult.LoggedInUser;
 
-            /*if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
+           /* if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
             {
                 m_LoggedInUser = m_LoginResult.LoggedInUser;
             }*/
