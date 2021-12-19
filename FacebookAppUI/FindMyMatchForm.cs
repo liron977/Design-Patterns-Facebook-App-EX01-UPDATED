@@ -27,7 +27,6 @@ namespace BasicFacebookFeatures
             new Thread(fetchMatches).Start();
             
         }
-
         private void fetchFan()
         {
             

@@ -44,8 +44,12 @@ namespace BasicFacebookFeatures
         }
         private void fetchPictures()
         {
-            m_Photos = m_FriendFacade.GetPictures();
-            new Thread(fetchPhoto).Start();
+            Thread thread = new Thread(() =>
+            {
+                m_Photos = m_FriendFacade.GetPictures();
+                fetchPhoto();
+            });
+           // new Thread(fetchPhoto).Start();
         }
 
         private void fetchLikedPages()

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
+using System.Threading;
 
 namespace FacebookAppLogic
 {
@@ -17,12 +18,12 @@ namespace FacebookAppLogic
         public PostRankFormLogic()
         {
             r_UserPosts = new Dictionary<Post, int>();
-            initUserPostsOrderedByMonthList();
-            initUserPostsOrderedByYearList();
-            initPostsList();
+       /*    new Thread(initUserPostsOrderedByMonthList).Start();
+            new Thread(initUserPostsOrderedByYearList).Start();
+            new Thread(initPostsList).Start();*/
         }
 
-        private void initUserPostsOrderedByMonthList()
+        public void initUserPostsOrderedByMonthList()
         {
             for(int i = 0; i < k_NumberOfMonths; i++)
             {
@@ -30,7 +31,7 @@ namespace FacebookAppLogic
             }
         }
 
-        private void initUserPostsOrderedByYearList()
+        public void initUserPostsOrderedByYearList()
         {
             for(int i = 0; i < k_CurrentYear; i++)
             {
@@ -74,7 +75,7 @@ namespace FacebookAppLogic
             }
         }
 
-        private void initPostsList()
+        public void initPostsList()
         {
             int postCreatedMonth = 0;
             int postCreatedYear = 0;

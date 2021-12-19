@@ -8,7 +8,6 @@ namespace BasicFacebookFeatures
     internal partial class PostInformationForm : Form
     {
         public Post m_UserPost;
-        //private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private UserProfileFacade m_ProfileFacade = new UserProfileFacade();
         private const string k_MessageSomethingWrong = "Something wrong. Try later";
         private const string k_MessageNoData = "No data to show";
@@ -18,19 +17,6 @@ namespace BasicFacebookFeatures
         {
             InitializeComponent();
         }
-
-       /* public FacebookAppManager AppManager
-        {
-            get
-            {
-                return m_AppManager;
-            }
-            set
-            {
-                m_AppManager = value;
-            }
-        }*/
-
         public void Post(Post i_UserSelectedPost)
         {
             m_UserPost = i_UserSelectedPost;

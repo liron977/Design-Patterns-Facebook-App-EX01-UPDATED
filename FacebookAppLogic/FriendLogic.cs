@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
+using System.Threading;
 
 namespace FacebookAppLogic
 {
@@ -59,7 +60,8 @@ namespace FacebookAppLogic
 
             try
             {
-                foreach (Album album in Friend.Albums)
+               
+                    foreach (Album album in Friend.Albums)
                 {
                     foreach (Photo photo in album.Photos)
                     {

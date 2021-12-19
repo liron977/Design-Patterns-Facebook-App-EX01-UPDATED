@@ -6,11 +6,8 @@ namespace BasicFacebookFeatures
 {
     internal partial class FriendProfileForm : Form
     {
-        //private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         public readonly FriendFacade r_ProfileFacade = new FriendFacade();
         
-       
-
         protected override void OnShown(EventArgs e)
         {
             FriendPicture.Load(r_ProfileFacade.GetPicture());

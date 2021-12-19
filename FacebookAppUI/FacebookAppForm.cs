@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using FacebookAppLogic;
 using FacebookWrapper;
+using System.Threading;
 
 namespace BasicFacebookFeatures
 {
@@ -34,6 +35,10 @@ namespace BasicFacebookFeatures
         }
 
         private void postStatistics_Click(object sender, EventArgs e)
+        {
+          postStatisticsLoad();
+        }
+        private void postStatisticsLoad()
         {
             PostRankForm postRankForm = new PostRankForm();
             postRankForm.Show();

@@ -22,7 +22,17 @@ namespace FacebookAppLogic
         }
         public List<string> GetMyMatchesInfo()
         {
-            return m_FindMyMatchLogic.FetchMyMatchesInfo();
+
+            List<string> matchesByFormat = new List<string>();
+
+            foreach (FriendLogic friend in m_FindMyMatchLogic.r_FriendsList)
+            {
+                IMyMatchFormat iMatchesFormat = new MyMatchFormatAdapter(friend.Friend);
+                matchesByFormat.AddRange(iMatchesFormat.CreateFormattedMatchesList());
+
+            }
+
+            return matchesByFormat;
         }
         public User GetMyFan()
         {

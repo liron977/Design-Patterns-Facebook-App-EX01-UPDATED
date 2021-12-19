@@ -13,7 +13,7 @@ namespace FacebookAppLogic
         private const string k_MessageFailedFetch = "Fetch failed. Please try again.";
         private static readonly object sr_FacebookAppManagerLock = new object();
 
-        public List<string> FetchMyMatchesInfo()
+     /*   public List<string> FetchMyMatchesInfo()
         {
 
             List<string> matchesByFormat = new List<string>();
@@ -26,7 +26,7 @@ namespace FacebookAppLogic
             }
 
             return matchesByFormat;
-        }
+        }*/
 
         public int GetNameIndex(string selected_item, int selectedIndex)
         {
@@ -143,7 +143,9 @@ namespace FacebookAppLogic
         {
             try
             {
-                foreach(Post postOfUser in m_AppManager.m_LoggedInUser.Posts)
+              
+                
+                foreach (Post postOfUser in m_AppManager.m_LoggedInUser.Posts)
                 {
                     foreach(User friend in postOfUser.LikedBy)
                     {

@@ -9,8 +9,6 @@ namespace BasicFacebookFeatures
     {
 
         private readonly LoginFacade r_LoginFacade; 
-        //private FacebookAppManager m_AppManager =FacebookAppManager.Instance;
-
         private const string k_MessageCantLogin = "Cant login";
 
         public FormMain()
@@ -25,10 +23,8 @@ namespace BasicFacebookFeatures
             try
             {
                 r_LoginFacade.Login();
-                //m_AppManager.UserLogin();
                 this.Hide();
                 FacebookAppForm facebookApp = new FacebookAppForm();
-                //facebookApp.AppManager = m_AppManager;
                 facebookApp.Closed += (s, args) => this.Close();
                 facebookApp.Show();
             }
