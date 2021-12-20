@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using FacebookAppLogic;
 using FacebookWrapper.ObjectModel;
-
+using System.Threading;
 namespace BasicFacebookFeatures
 {
     internal partial class UserProfileForm : Form
@@ -24,13 +24,16 @@ namespace BasicFacebookFeatures
 
         protected override void OnShown(EventArgs e)
         {
-            ProfilePicture.Load(m_ProfileFacade.GetPicture());
-            fetchNewsFeed();
-            fetchFriends();
-            fetchUpcomingBirthdays();
-            fetchAlbums();
+            new Thread(fetchInfo).Start();
         }
-
+        protected void fetchInfo()
+        {
+          ProfilePicture.Load(m_ProfileFacade.GetPicture());
+            new Thread(fetchNewsFeed).Start();
+            new Thread(fetchFriends).Start();
+            new Thread(fetchUpcomingBirthdays).Start();
+            new Thread(fetchAlbums).Start();
+        }
 
         private void fetchUpcomingBirthdays()
         {
@@ -38,7 +41,7 @@ namespace BasicFacebookFeatures
             {
                 if(upcomingBirthdaysListBox.Items.Count != 0)
                 {
-                    upcomingBirthdaysListBox.Items.Clear();
+                    upcomingBirthdaysListBox.Invoke(new Action(() => upcomingBirthdaysListBox.Items.Clear()));
                 }
                 else
                 {
@@ -46,7 +49,7 @@ namespace BasicFacebookFeatures
 
                     foreach(string friendUser in friendList)
                     {
-                        upcomingBirthdaysListBox.Items.Add(friendUser);
+                        upcomingBirthdaysListBox.Invoke(new Action(() => upcomingBirthdaysListBox.Items.Add(friendUser)));
                     }
 
                     if(friendsListBox.Items.Count == 0)
@@ -75,7 +78,7 @@ namespace BasicFacebookFeatures
 
                     foreach(User friendUser in friendList)
                     {
-                        friendsListBox.Items.Add(friendUser);
+                        friendsListBox.Invoke(new Action(() => friendsListBox.Items.Add(friendUser)));
                     }
 
                     if(friendsListBox.Items.Count == 0)
@@ -99,12 +102,12 @@ namespace BasicFacebookFeatures
 
                 foreach(string post in userPosts)
                 {
-                    posts.Items.Add(post);
+                    posts.Invoke(new Action(() => posts.Items.Add(post)));
                 }
 
                 if(posts.Items.Count == 0)
                 {
-                    posts.Items.Add(k_MessageNoData);
+                    posts.Invoke(new Action(() => posts.Items.Add(k_MessageNoData)));
                 }
             }
             catch(Exception ex)
@@ -115,9 +118,7 @@ namespace BasicFacebookFeatures
 
         private void friendsListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //User user = m_AppManager.LoggedInUser;
             showSelectedFriendDetails();
-           // m_AppManager.LoggedInUser = user;
         }
 
         private void showSelectedFriendDetails()
@@ -125,9 +126,7 @@ namespace BasicFacebookFeatures
             if(friendsListBox.SelectedItems.Count == 1)
             {
                 User userFriend = friendsListBox.SelectedItem as User;
-                FriendProfileForm friendProfile = new FriendProfileForm();
-                //friendProfile.AppManager.LoggedInUser = userFriend;
-              
+                FriendProfileForm friendProfile = new FriendProfileForm();            
                 friendProfile.r_ProfileFacade.FriendLogic.Friend = userFriend;
 
                 friendProfile.Show();
@@ -143,12 +142,12 @@ namespace BasicFacebookFeatures
 
                 foreach(Album album in userAlbums)
                 {
-                    albumListBox.Items.Add(album);
+                    albumListBox.Invoke(new Action(() => albumListBox.Items.Add(album)));
                 }
 
                 if(albumListBox.Items.Count == 0)
                 {
-                    albumListBox.Items.Add(k_MessageNoData);
+                    albumListBox.Invoke(new Action(() => albumListBox.Items.Add(k_MessageNoData)));
                 }
             }
             catch(Exception ex)

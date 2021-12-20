@@ -23,7 +23,6 @@ namespace BasicFacebookFeatures
         protected override void OnShown(EventArgs e)
         {
             new Thread(fetchFan).Start();
-            //fetchFan();
             new Thread(fetchMatches).Start();
             
         }
@@ -34,9 +33,12 @@ namespace BasicFacebookFeatures
             {
                 try
                 {
-                    User myFan = m_MyMatchFacade.GetMyFan();
+                 
+                        User myFan = m_MyMatchFacade.GetMyFan();
+                 
                     FriendWhoLoveMePictureBox.Invoke(new Action(() => FriendWhoLoveMePictureBox.Load(myFan.PictureNormalURL)));
                     FriendWhoLoveMeLabel.Invoke(new Action(() => FriendWhoLoveMeLabel.Text = myFan.Name));
+            
                 }
                 catch(Exception ex)
                 {

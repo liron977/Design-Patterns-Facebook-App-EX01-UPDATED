@@ -49,7 +49,7 @@ namespace BasicFacebookFeatures
                 m_Photos = m_FriendFacade.GetPictures();
                 fetchPhoto();
             });
-           // new Thread(fetchPhoto).Start();
+            thread.Start();
         }
 
         private void fetchLikedPages()

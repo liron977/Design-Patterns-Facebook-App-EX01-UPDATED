@@ -60,12 +60,7 @@ namespace BasicFacebookFeatures
         protected override void OnShown(EventArgs e)
         {
           
-            new Thread(testtest).Start();
-        }
-        public void testtest()
-        {
-           
-            fetchInfo();
+            new Thread(fetchInfo).Start();
         }
         private void fetchInfo()
         {
@@ -75,7 +70,6 @@ namespace BasicFacebookFeatures
 
         private void ascending_CheckedChanged(object sender, EventArgs e)
         {
-             //new Thread(ascendingInfo).Start();
            ascendingInfo();
         }
 
@@ -134,7 +128,6 @@ namespace BasicFacebookFeatures
         }
         private void descendingSorted_CheckedChanged(object sender, EventArgs e)
         {
-            //new Thread(descendingSortedInfo).Start();
             descendingSortedInfo();
         }
 

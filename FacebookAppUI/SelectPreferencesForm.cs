@@ -46,13 +46,6 @@ namespace BasicFacebookFeatures
                 int.Parse(ToNumericUpDown.Value.ToString()),
                 genderSelection);
             FindMyMatchForm findMyMatchForm = new FindMyMatchForm(m_MyMatchFacade.GetMyMatchs());
-         
-          /*
-            foreach(FriendLogic friend in m_MyMatchFacade.GetMyMatchs())
-            {
-                findMyMatchForm.m_MyMatchFacade.GetMyMatchs().Add(friend);
-            }*/
-
             this.Close();
             findMyMatchForm.Show();
         }
