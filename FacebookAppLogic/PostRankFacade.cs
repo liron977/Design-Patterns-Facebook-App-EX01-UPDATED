@@ -44,14 +44,14 @@ namespace FacebookAppLogic
             return r_PostRank.CurrentYear;
         }
         
-        public int GetUserPostsOrderedByMonth(int index)
+        public int GetUserPostsOrderedByMonth(int i_Index)
         {
-            return r_PostRank.UserPostsOrderedByMonth[index].Count;
+            return r_PostRank.UserPostsOrderedByMonth[i_Index].Count;
         }
 
-        public int GetUserPostsOrderedByYear(int index)
+        public int GetUserPostsOrderedByYear(int i_Index)
         {
-            return r_PostRank.UserPostsOrderedByYear[index].Count;
+            return r_PostRank.UserPostsOrderedByYear[i_Index].Count;
         }
 
 

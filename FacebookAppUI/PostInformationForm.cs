@@ -17,6 +17,7 @@ namespace BasicFacebookFeatures
         {
             InitializeComponent();
         }
+
         public void Post(Post i_UserSelectedPost)
         {
             m_UserPost = i_UserSelectedPost;

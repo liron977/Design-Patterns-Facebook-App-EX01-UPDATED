@@ -11,9 +11,9 @@ namespace FacebookAppLogic
     {
         private FindMyMatchLogic m_FindMyMatchLogic = new FindMyMatchLogic();
 
-        public void FilterMyMatch(int fromAge, int toAge, User.eGender gender)
+        public void FilterMyMatch(int i_FromAge, int i_ToAge, User.eGender i_Gender)
         {
-            m_FindMyMatchLogic.FilterMyMatch(fromAge, toAge, gender);
+            m_FindMyMatchLogic.FilterMyMatch(i_FromAge, i_ToAge, i_Gender);
         }
 
         public List<FriendLogic> GetMyMatchs()
@@ -44,14 +44,14 @@ namespace FacebookAppLogic
             m_FindMyMatchLogic.UpdateFriendList(i_FriendsList);
         }
 
-        public int GetSelectedMatchIndex(string selected_item, int selectedIndex)
+        public int GetSelectedMatchIndex(string i_Selected_item, int i_SelectedIndex)
         {
-            return m_FindMyMatchLogic.GetNameIndex(selected_item, selectedIndex);
+            return m_FindMyMatchLogic.GetNameIndex(i_Selected_item, i_SelectedIndex);
         }
 
-        public User GetSelectedMatch(string selectedMatch)
+        public User GetSelectedMatch(string i_SelectedMatch)
         {
-            return m_FindMyMatchLogic.FindSelectedFriend(selectedMatch);
+            return m_FindMyMatchLogic.FindSelectedFriend(i_SelectedMatch);
         }
 
 

@@ -9,7 +9,7 @@ namespace FacebookAppLogic
     public class FindMyMatchLogic
     {
         public readonly List<FriendLogic> r_FriendsList = new List<FriendLogic>();
-        private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
+        private readonly FacebookAppManager m_AppManager = FacebookAppManager.Instance;
         private const string k_MessageFailedFetch = "Fetch failed. Please try again.";
         private static readonly object sr_FacebookAppManagerLock = new object();
 
@@ -28,19 +28,19 @@ namespace FacebookAppLogic
             return matchesByFormat;
         }*/
 
-        public int GetNameIndex(string selected_item, int selectedIndex)
+        public int GetNameIndex(string i_Selected_item, int i_SelectedIndex)
         {
 
-            switch(selected_item[0])
+            switch(i_Selected_item[0])
             {
                 case '-':
-                    return selectedIndex - 3;
+                    return i_SelectedIndex - 3;
                 case 'L':
-                    return selectedIndex - 2;
+                    return i_SelectedIndex - 2;
                 case 'A':
-                    return selectedIndex - 1;
+                    return i_SelectedIndex - 1;
                 default:
-                    return selectedIndex;
+                    return i_SelectedIndex;
             }
         }
 
