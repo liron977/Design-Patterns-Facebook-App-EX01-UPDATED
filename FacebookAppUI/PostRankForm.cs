@@ -19,17 +19,10 @@ namespace BasicFacebookFeatures
         public PostRankForm()
         {
             InitializeComponent();
-            initInfo();
 
 
         }
-        private void initInfo()
-        {
-            m_AppPostsFacade.initUserPostsOrderedByMonthList();
-            m_AppPostsFacade.initUserPostsOrderedByYearList();
-            m_AppPostsFacade.initPostsList();
-
-        }
+     
         private void displayedPostCommentsRank()
         {
             try
@@ -47,20 +40,22 @@ namespace BasicFacebookFeatures
 
         private void monthsChartPosts_Click(object sender, EventArgs e)
         {
-            PostsChartByMonthsForm commentsChartByMonths = new PostsChartByMonthsForm();
+            PostsChartByMonthsForm commentsChartByMonths = new PostsChartByMonthsForm(m_AppPostsFacade);
             commentsChartByMonths.Show();
         }
 
         private void yearChartPost_Click(object sender, EventArgs e)
         {
-            PostsChartByYearForm commentsChartByYear = new PostsChartByYearForm();
+            PostsChartByYearForm commentsChartByYear = new PostsChartByYearForm(m_AppPostsFacade);
             commentsChartByYear.Show();
         }
 
         protected override void OnShown(EventArgs e)
         {
-          
-            new Thread(fetchInfo).Start();
+            changeButtonStatus(false);
+            m_AppPostsFacade.initPostsInfo();
+            fetchInfo();
+            changeButtonStatus(true);
         }
         private void fetchInfo()
         {
@@ -68,6 +63,14 @@ namespace BasicFacebookFeatures
             displayedPostCommentsRank();
         }
 
+        private void changeButtonStatus(bool i_EnableBotton)
+        {
+            monthsChartPosts.Enabled = i_EnableBotton;
+            yearChartPost.Enabled = i_EnableBotton;
+            ascending.Enabled = i_EnableBotton;
+            descendingSorted.Enabled = i_EnableBotton;
+
+        }
         private void ascending_CheckedChanged(object sender, EventArgs e)
         {
            ascendingInfo();

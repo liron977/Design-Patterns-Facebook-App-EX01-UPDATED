@@ -16,17 +16,11 @@ namespace FacebookAppLogic
         {
             return r_PostRank.UserPosts;
         }
-  
-        public void initUserPostsOrderedByMonthList()
+
+        public void initPostsInfo()
         {
-           r_PostRank.initUserPostsOrderedByMonthList();
-        }
-        public void initUserPostsOrderedByYearList()
-        {
+            r_PostRank.initUserPostsOrderedByMonthList();
             r_PostRank.initUserPostsOrderedByYearList();
-        }
-        public void initPostsList()
-        {
             r_PostRank.initPostsList();
         }
         public Post GetTheMostPopularPostByComments()

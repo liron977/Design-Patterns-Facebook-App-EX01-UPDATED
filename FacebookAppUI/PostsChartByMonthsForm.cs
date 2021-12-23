@@ -11,8 +11,9 @@ namespace BasicFacebookFeatures
 
         // private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
 
-        public PostsChartByMonthsForm()
+        public PostsChartByMonthsForm(PostRankFacade i_AppPostsFacade)
         {
+            m_AppPostsFacade = i_AppPostsFacade;
             InitializeComponent();
         }
 

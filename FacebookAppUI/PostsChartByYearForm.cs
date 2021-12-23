@@ -13,8 +13,9 @@ namespace BasicFacebookFeatures
         
         public const int k_Millennium = 2000;
 
-        public PostsChartByYearForm()
+        public PostsChartByYearForm(PostRankFacade i_AppPostsFacade)
         {
+            m_AppPostsFacade = i_AppPostsFacade;
             InitializeComponent();
         }
 

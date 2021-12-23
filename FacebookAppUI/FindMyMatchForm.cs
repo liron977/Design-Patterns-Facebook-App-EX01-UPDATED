@@ -22,10 +22,12 @@ namespace BasicFacebookFeatures
 
         protected override void OnShown(EventArgs e)
         {
+            recommendedMatchesListBox.Enabled = false;
             new Thread(fetchFan).Start();
             new Thread(fetchMatches).Start();
-            
+
         }
+
         private void fetchFan()
         {
             
@@ -45,6 +47,7 @@ namespace BasicFacebookFeatures
                     MessageBox.Show(ex.Message);
                 }
             }
+            recommendedMatchesListBox.Enabled = true;
         }
 
         private void fetchMatches()
