@@ -17,22 +17,20 @@ namespace BasicFacebookFeatures
         private int m_PhotoListIndex;
         private const string k_MessageSomethingWrong = @"Something wrong. Try later";
         private const string k_MessageSentSuccessfully = "-sent successfully";
+
         public MyMatchForm()
         {
             InitializeComponent();
             m_PhotoListIndex = 0;
         }
 
-        protected override void OnShown(EventArgs e)
+        protected override void OnShown(EventArgs i_E)
         {
-            new Thread (fetchMatchInfo).Start();
-    
+            new Thread(fetchMatchInfo).Start();
         }
 
         private void fetchMatchInfo()
         {
-           
-          
             MyMatchPictureBox.Load(m_FriendFacade.GetPicture());
             UserGenderLabel.Invoke(new Action(() => UserGenderLabel.Text = m_FriendFacade.GetGender()));
             UserAgeLabel.Invoke(new Action(() => UserAgeLabel.Text = m_FriendFacade.GetAge().ToString()));
@@ -40,15 +38,16 @@ namespace BasicFacebookFeatures
             MyMatchNameLabel.Invoke(new Action(() => MyMatchNameLabel.Text = m_FriendFacade.GetUserName()));
             new Thread(fetchLikedPages).Start();
             new Thread(fetchPictures).Start();
-          
         }
+
         private void fetchPictures()
         {
-            Thread thread = new Thread(() =>
-            {
-                m_Photos = m_FriendFacade.GetPictures();
-                fetchPhoto();
-            });
+            Thread thread = new Thread(
+                () =>
+                    {
+                        m_Photos = m_FriendFacade.GetPictures();
+                        fetchPhoto();
+                    });
             thread.Start();
         }
 
@@ -58,13 +57,15 @@ namespace BasicFacebookFeatures
             List<Page> likedPages = m_FriendFacade.GetLikedPages();
             try
             {
-                LikedPagesListBox.Invoke(new Action(() =>
-                {
-                    foreach (Page page in likedPages)
-                    {
-                        LikedPagesListBox.Items.Add(page);
-                    }
-                }));
+                LikedPagesListBox.Invoke(
+                    new Action(
+                        () =>
+                            {
+                                foreach(Page page in likedPages)
+                                {
+                                    LikedPagesListBox.Items.Add(page);
+                                }
+                            }));
             }
             catch(Exception ex)
             {
@@ -78,7 +79,7 @@ namespace BasicFacebookFeatures
         }
 
 
-        private void postButton_Click(object sender, EventArgs e)
+        private void postButton_Click(object i_Sender, EventArgs i_E)
         {
             postAndTagFriend(m_FriendFacade.FriendLogic.Friend, FirstMoveTextBox.Text);
         }
@@ -97,7 +98,7 @@ namespace BasicFacebookFeatures
         }
 
 
-        private void nextPictureButton_Click(object sender, EventArgs e)
+        private void nextPictureButton_Click(object i_Sender, EventArgs i_E)
         {
             if(m_PhotoListIndex + 1 == m_Photos.Count)
             {
@@ -111,7 +112,7 @@ namespace BasicFacebookFeatures
             MyMatchPicrutesBox.Load(m_Photos[m_PhotoListIndex].PictureNormalURL);
         }
 
-        private void previousPictureButton_Click(object sender, EventArgs e)
+        private void previousPictureButton_Click(object i_Sender, EventArgs i_E)
         {
             if(m_PhotoListIndex == 0)
             {

@@ -76,7 +76,7 @@ namespace BasicFacebookFeatures
         }
 
 
-        protected override void OnShown(EventArgs e)
+        protected override void OnShown(EventArgs i_E)
         {
             fetchUserPostMessage();
             fetchUserPostTaggedFriends();
@@ -84,19 +84,19 @@ namespace BasicFacebookFeatures
             fetchUserPostComments();
         }
 
-        private void PostInformation_Load(object sender, EventArgs e)
+        private void PostInformation_Load(object i_Sender, EventArgs i_E)
 
         {
             fetchUserPostMessage();
         }
 
-        private void shareYouPostButton_Click(object sender, EventArgs e)
+        private void shareYouPostButton_Click(object i_Sender, EventArgs i_E)
         {
             try
             {
                 if(!(string.IsNullOrEmpty(postTextBox.Text)))
                 {
-                    Status postedStatus = r_ProfileFacade.PostStatus(postTextBox.Text);
+                    r_ProfileFacade.PostStatus(postTextBox.Text);
                     MessageBox.Show(k_MessageStatusPosted);
                 }
                 else
@@ -109,7 +109,5 @@ namespace BasicFacebookFeatures
                 MessageBox.Show(k_MessageSomethingWrong);
             }
         }
-
-       
     }
 }

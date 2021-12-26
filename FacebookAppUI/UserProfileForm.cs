@@ -4,11 +4,11 @@ using System.Windows.Forms;
 using FacebookAppLogic;
 using FacebookWrapper.ObjectModel;
 using System.Threading;
+
 namespace BasicFacebookFeatures
 {
     internal partial class UserProfileForm : Form
     {
-      
         private readonly UserProfileFacade r_ProfileFacade = new UserProfileFacade();
 
         private const string k_MessageSomethingWrong = "Something wrong. Try later";
@@ -22,13 +22,14 @@ namespace BasicFacebookFeatures
             InitializeComponent();
         }
 
-        protected override void OnShown(EventArgs e)
+        protected override void OnShown(EventArgs i_E)
         {
             new Thread(fetchInfo).Start();
         }
-        protected void fetchInfo()
+
+        private void fetchInfo()
         {
-          ProfilePicture.Load(r_ProfileFacade.GetPicture());
+            ProfilePicture.Load(r_ProfileFacade.GetPicture());
             new Thread(fetchNewsFeed).Start();
             new Thread(fetchFriends).Start();
             new Thread(fetchUpcomingBirthdays).Start();
@@ -49,7 +50,8 @@ namespace BasicFacebookFeatures
 
                     foreach(string friendUser in friendList)
                     {
-                        upcomingBirthdaysListBox.Invoke(new Action(() => upcomingBirthdaysListBox.Items.Add(friendUser)));
+                        upcomingBirthdaysListBox.Invoke(
+                            new Action(() => upcomingBirthdaysListBox.Items.Add(friendUser)));
                     }
 
                     if(friendsListBox.Items.Count == 0)
@@ -116,7 +118,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void friendsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void friendsListBox_SelectedIndexChanged(object i_Sender, EventArgs i_E)
         {
             showSelectedFriendDetails();
         }
@@ -126,11 +128,10 @@ namespace BasicFacebookFeatures
             if(friendsListBox.SelectedItems.Count == 1)
             {
                 User userFriend = friendsListBox.SelectedItem as User;
-                FriendProfileForm friendProfile = new FriendProfileForm();            
+                FriendProfileForm friendProfile = new FriendProfileForm();
                 friendProfile.r_ProfileFacade.FriendLogic.Friend = userFriend;
 
                 friendProfile.Show();
-         
             }
         }
 
@@ -159,32 +160,32 @@ namespace BasicFacebookFeatures
         }
 
 
-       /* private void albumListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (albumListBox.SelectedItems.Count == 1)
-            {
-                Album selectedAlbum = albumListBox.SelectedItem as Album;
-                if (selectedAlbum != null && selectedAlbum.PictureAlbumURL != null)
-                {
-                    AlbumCoverPictureBox.LoadAsync(selectedAlbum.PictureAlbumURL);
-                }
-                else
-                {
-                    AlbumCoverPictureBox.Image = AlbumCoverPictureBox.ErrorImage;
-                }
+        /* private void albumListBox_SelectedIndexChanged(object sender, EventArgs e)
+         {
+             if (albumListBox.SelectedItems.Count == 1)
+             {
+                 Album selectedAlbum = albumListBox.SelectedItem as Album;
+                 if (selectedAlbum != null && selectedAlbum.PictureAlbumURL != null)
+                 {
+                     AlbumCoverPictureBox.LoadAsync(selectedAlbum.PictureAlbumURL);
+                 }
+                 else
+                 {
+                     AlbumCoverPictureBox.Image = AlbumCoverPictureBox.ErrorImage;
+                 }
+ 
+             }
+             
+ 
+         }*/
 
-            }
-            
-
-        }*/
-
-        private void postStatusButton_Click_1(object sender, EventArgs e)
+        private void postStatusButton_Click_1(object i_Sender, EventArgs i_E)
         {
             try
             {
                 if(!(string.IsNullOrEmpty(PostStatusTextBox.Text)))
                 {
-                    Status postedStatus = r_ProfileFacade.PostStatus(PostStatusTextBox.Text);
+                    r_ProfileFacade.PostStatus(PostStatusTextBox.Text);
                     MessageBox.Show(k_MessageStatusPosted);
                 }
                 else
@@ -196,16 +197,6 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show(k_MessageSomethingWrong);
             }
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void AlbumCoverPictureBox_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

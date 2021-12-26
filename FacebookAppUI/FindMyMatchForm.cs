@@ -12,7 +12,6 @@ namespace BasicFacebookFeatures
         private readonly MyMatchFacade r_MyMatchFacade = new MyMatchFacade();
 
         private const string k_MessageNoMatches = "No matches to retrieve";
-       
 
         public FindMyMatchForm(List<FriendLogic> i_FriendsList)
         {
@@ -20,33 +19,31 @@ namespace BasicFacebookFeatures
             InitializeComponent();
         }
 
-        protected override void OnShown(EventArgs e)
+        protected override void OnShown(EventArgs i_E)
         {
             recommendedMatchesListBox.Enabled = false;
             new Thread(fetchFan).Start();
             new Thread(fetchMatches).Start();
-
         }
 
         private void fetchFan()
         {
-            
             if(r_MyMatchFacade.GetMyMatchs().Count > 0)
             {
                 try
                 {
-                 
-                        User myFan = r_MyMatchFacade.GetMyFan();
-                 
-                    FriendWhoLoveMePictureBox.Invoke(new Action(() => FriendWhoLoveMePictureBox.Load(myFan.PictureNormalURL)));
+                    User myFan = r_MyMatchFacade.GetMyFan();
+
+                    FriendWhoLoveMePictureBox.Invoke(
+                        new Action(() => FriendWhoLoveMePictureBox.Load(myFan.PictureNormalURL)));
                     FriendWhoLoveMeLabel.Invoke(new Action(() => FriendWhoLoveMeLabel.Text = myFan.Name));
-            
                 }
                 catch(Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
             }
+
             recommendedMatchesListBox.Enabled = true;
         }
 
@@ -57,7 +54,6 @@ namespace BasicFacebookFeatures
                 foreach(string matchInfo in r_MyMatchFacade.GetMyMatchesInfo())
                 {
                     recommendedMatchesListBox.Invoke(new Action(() => recommendedMatchesListBox.Items.Add(matchInfo)));
-                  
                 }
 
                 if(recommendedMatchesListBox.Items.Count == 0)
@@ -71,9 +67,9 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void recommendedMatchesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void recommendedMatchesListBox_SelectedIndexChanged(object i_Sender, EventArgs i_E)
         {
-           showSelectedFriendDetails();
+            showSelectedFriendDetails();
         }
 
         private void showSelectedFriendDetails()
@@ -81,13 +77,13 @@ namespace BasicFacebookFeatures
             if(recommendedMatchesListBox.SelectedItems.Count == 1)
             {
                 MyMatchForm myMatch = new MyMatchForm();
-                int matchNameIndex
-             = r_MyMatchFacade.GetSelectedMatchIndex(
-                  recommendedMatchesListBox.SelectedItem.ToString(),
-                  recommendedMatchesListBox.SelectedIndex);
+                int matchNameIndex = r_MyMatchFacade.GetSelectedMatchIndex(
+                    recommendedMatchesListBox.SelectedItem.ToString(),
+                    recommendedMatchesListBox.SelectedIndex);
 
-               myMatch.m_FriendFacade.FriendLogic.Friend = r_MyMatchFacade.GetSelectedMatch(recommendedMatchesListBox.Items[matchNameIndex].ToString());
-               myMatch.Show();
+                myMatch.m_FriendFacade.FriendLogic.Friend =
+                    r_MyMatchFacade.GetSelectedMatch(recommendedMatchesListBox.Items[matchNameIndex].ToString());
+                myMatch.Show();
             }
         }
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows.Forms;
 using FacebookAppLogic;
 
@@ -8,9 +7,9 @@ namespace BasicFacebookFeatures
 {
     internal partial class PostsChartByYearForm : Form
     {
-        private readonly PostRankFacade r_AppPostsFacade = new PostRankFacade();
+        private readonly PostRankFacade r_AppPostsFacade;
 
-        
+
         public const int k_Millennium = 2000;
 
         public PostsChartByYearForm(PostRankFacade i_AppPostsFacade)
@@ -19,10 +18,8 @@ namespace BasicFacebookFeatures
             InitializeComponent();
         }
 
-
-        protected override void OnShown(EventArgs e)
+        protected override void OnShown(EventArgs i_E)
         {
-           
             displayedCommentsChartOrderedByYear();
         }
 
@@ -30,7 +27,7 @@ namespace BasicFacebookFeatures
         {
             int currentYear = r_AppPostsFacade.GetCurrentYear();
 
-            for (int i = 1; i < currentYear; i++)
+            for(int i = 1; i < currentYear; i++)
             {
                 commentsChart.Series["Posts"].Points.AddXY(
                     i + k_Millennium,
