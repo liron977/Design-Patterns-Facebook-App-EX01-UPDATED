@@ -7,13 +7,13 @@ namespace BasicFacebookFeatures
 {
     internal partial class PostsChartByMonthsForm : Form
     {
-        private PostRankFacade m_AppPostsFacade = new PostRankFacade();
+        private readonly PostRankFacade r_AppPostsFacade = new PostRankFacade();
 
         // private FacebookAppManager m_AppManager = FacebookAppManager.Instance;
 
         public PostsChartByMonthsForm(PostRankFacade i_AppPostsFacade)
         {
-            m_AppPostsFacade = i_AppPostsFacade;
+            r_AppPostsFacade = i_AppPostsFacade;
             InitializeComponent();
         }
 
@@ -37,10 +37,10 @@ namespace BasicFacebookFeatures
 
         private void displayedCommentsChartOrderedByMonths()
         {
-            int NumberOfMonths = m_AppPostsFacade.GetNumberOfMonths();
+            int NumberOfMonths = r_AppPostsFacade.GetNumberOfMonths();
             for (int i = 1; i < NumberOfMonths; i++)
             {
-                commentsChart.Series["Posts"].Points.AddXY(i, m_AppPostsFacade.GetUserPostsOrderedByMonth(i));
+                commentsChart.Series["Posts"].Points.AddXY(i, r_AppPostsFacade.GetUserPostsOrderedByMonth(i));
             }
         }
     }

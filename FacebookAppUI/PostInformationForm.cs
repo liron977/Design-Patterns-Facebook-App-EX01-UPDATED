@@ -8,7 +8,7 @@ namespace BasicFacebookFeatures
     internal partial class PostInformationForm : Form
     {
         public Post m_UserPost;
-        private UserProfileFacade m_ProfileFacade = new UserProfileFacade();
+        private readonly UserProfileFacade r_ProfileFacade = new UserProfileFacade();
         private const string k_MessageSomethingWrong = "Something wrong. Try later";
         private const string k_MessageNoData = "No data to show";
         private const string k_MessageStatusPosted = "Status Posted!";
@@ -96,7 +96,7 @@ namespace BasicFacebookFeatures
             {
                 if(!(string.IsNullOrEmpty(postTextBox.Text)))
                 {
-                    Status postedStatus = m_ProfileFacade.PostStatus(postTextBox.Text);
+                    Status postedStatus = r_ProfileFacade.PostStatus(postTextBox.Text);
                     MessageBox.Show(k_MessageStatusPosted);
                 }
                 else
@@ -109,5 +109,7 @@ namespace BasicFacebookFeatures
                 MessageBox.Show(k_MessageSomethingWrong);
             }
         }
+
+       
     }
 }

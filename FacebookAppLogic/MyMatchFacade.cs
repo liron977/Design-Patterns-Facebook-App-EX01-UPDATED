@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
@@ -20,40 +16,38 @@ namespace FacebookAppLogic
         {
             return m_FindMyMatchLogic.r_FriendsList;
         }
+
         public List<string> GetMyMatchesInfo()
         {
-
             List<string> matchesByFormat = new List<string>();
 
-            foreach (FriendLogic friend in m_FindMyMatchLogic.r_FriendsList)
+            foreach(FriendLogic friend in m_FindMyMatchLogic.r_FriendsList)
             {
                 IMyMatchFormat iMatchesFormat = new MyMatchFormatAdapter(friend.Friend);
                 matchesByFormat.AddRange(iMatchesFormat.CreateFormattedMatchesList());
-
             }
 
             return matchesByFormat;
         }
+
         public User GetMyFan()
         {
             return m_FindMyMatchLogic.FindMyFan();
         }
 
-        public void updateMatchsList(List<FriendLogic> i_FriendsList)
+        public void UpdateMatchesList(List<FriendLogic> i_FriendsList)
         {
             m_FindMyMatchLogic.UpdateFriendList(i_FriendsList);
         }
 
-        public int GetSelectedMatchIndex(string i_Selected_item, int i_SelectedIndex)
+        public int GetSelectedMatchIndex(string i_SelectedItem, int i_SelectedIndex)
         {
-            return m_FindMyMatchLogic.GetNameIndex(i_Selected_item, i_SelectedIndex);
+            return m_FindMyMatchLogic.GetNameIndex(i_SelectedItem, i_SelectedIndex);
         }
 
         public User GetSelectedMatch(string i_SelectedMatch)
         {
             return m_FindMyMatchLogic.FindSelectedFriend(i_SelectedMatch);
         }
-
-
     }
 }

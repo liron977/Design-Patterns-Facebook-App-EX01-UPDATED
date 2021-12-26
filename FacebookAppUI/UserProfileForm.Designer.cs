@@ -29,6 +29,9 @@ namespace BasicFacebookFeatures
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label imageAlbumLabel;
+            System.Windows.Forms.Label nameLabel;
             this.posts = new System.Windows.Forms.ListBox();
             this.PostStatusbutton = new System.Windows.Forms.Button();
             this.PostStatusTextBox = new System.Windows.Forms.TextBox();
@@ -39,11 +42,38 @@ namespace BasicFacebookFeatures
             this.upcomingBirthdaysListBox = new System.Windows.Forms.ListBox();
             this.UpcomingBirthdaysLabel = new System.Windows.Forms.Label();
             this.albumListBox = new System.Windows.Forms.ListBox();
+            this.albumBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.AlbumsLabel = new System.Windows.Forms.Label();
-            this.AlbumCoverPictureBox = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.imageAlbumPictureBox = new System.Windows.Forms.PictureBox();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
+            this.photosBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            imageAlbumLabel = new System.Windows.Forms.Label();
+            nameLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AlbumCoverPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.albumBindingSource)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageAlbumPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.photosBindingSource)).BeginInit();
             this.SuspendLayout();
+            // 
+            // imageAlbumLabel
+            // 
+            imageAlbumLabel.AutoSize = true;
+            imageAlbumLabel.Location = new System.Drawing.Point(12, 87);
+            imageAlbumLabel.Name = "imageAlbumLabel";
+            imageAlbumLabel.Size = new System.Drawing.Size(107, 20);
+            imageAlbumLabel.TabIndex = 0;
+            imageAlbumLabel.Text = "Image Album:";
+            // 
+            // nameLabel
+            // 
+            nameLabel.AutoSize = true;
+            nameLabel.Location = new System.Drawing.Point(27, 249);
+            nameLabel.Name = "nameLabel";
+            nameLabel.Size = new System.Drawing.Size(55, 20);
+            nameLabel.TabIndex = 2;
+            nameLabel.Text = "Name:";
             // 
             // posts
             // 
@@ -137,13 +167,19 @@ namespace BasicFacebookFeatures
             // 
             // albumListBox
             // 
+            this.albumListBox.DataSource = this.albumBindingSource;
+            this.albumListBox.DisplayMember = "Name";
             this.albumListBox.FormattingEnabled = true;
             this.albumListBox.ItemHeight = 20;
-            this.albumListBox.Location = new System.Drawing.Point(607, 289);
+            this.albumListBox.Location = new System.Drawing.Point(648, 111);
             this.albumListBox.Name = "albumListBox";
-            this.albumListBox.Size = new System.Drawing.Size(276, 204);
+            this.albumListBox.Size = new System.Drawing.Size(276, 124);
             this.albumListBox.TabIndex = 10;
-            this.albumListBox.SelectedIndexChanged += new System.EventHandler(this.albumListBox_SelectedIndexChanged);
+           // this.albumListBox.SelectedIndexChanged += new System.EventHandler(this.albumListBox_SelectedIndexChanged);
+            // 
+            // albumBindingSource
+            // 
+            this.albumBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Album);
             // 
             // AlbumsLabel
             // 
@@ -151,28 +187,54 @@ namespace BasicFacebookFeatures
             this.AlbumsLabel.BackColor = System.Drawing.Color.RoyalBlue;
             this.AlbumsLabel.Font = new System.Drawing.Font("Aharoni", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AlbumsLabel.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.AlbumsLabel.Location = new System.Drawing.Point(677, 242);
+            this.AlbumsLabel.Location = new System.Drawing.Point(654, 46);
             this.AlbumsLabel.Name = "AlbumsLabel";
             this.AlbumsLabel.Size = new System.Drawing.Size(112, 28);
             this.AlbumsLabel.TabIndex = 11;
             this.AlbumsLabel.Text = "Albums";
             // 
-            // AlbumCoverPictureBox
+            // panel1
             // 
-            this.AlbumCoverPictureBox.Location = new System.Drawing.Point(773, 358);
-            this.AlbumCoverPictureBox.Name = "AlbumCoverPictureBox";
-            this.AlbumCoverPictureBox.Size = new System.Drawing.Size(150, 135);
-            this.AlbumCoverPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.AlbumCoverPictureBox.TabIndex = 12;
-            this.AlbumCoverPictureBox.TabStop = false;
+            this.panel1.Controls.Add(imageAlbumLabel);
+            this.panel1.Controls.Add(this.imageAlbumPictureBox);
+            this.panel1.Controls.Add(nameLabel);
+            this.panel1.Controls.Add(this.nameTextBox);
+            this.panel1.Location = new System.Drawing.Point(648, 296);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(412, 297);
+            this.panel1.TabIndex = 16;
+            // 
+            // imageAlbumPictureBox
+            // 
+            this.imageAlbumPictureBox.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.albumBindingSource, "ImageAlbum", true));
+            this.imageAlbumPictureBox.Location = new System.Drawing.Point(140, 23);
+            this.imageAlbumPictureBox.Name = "imageAlbumPictureBox";
+            this.imageAlbumPictureBox.Size = new System.Drawing.Size(198, 174);
+            this.imageAlbumPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imageAlbumPictureBox.TabIndex = 1;
+            this.imageAlbumPictureBox.TabStop = false;
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.albumBindingSource, "Name", true));
+            this.nameTextBox.Location = new System.Drawing.Point(140, 243);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(185, 26);
+            this.nameTextBox.TabIndex = 3;
+            // 
+            // photosBindingSource
+            // 
+            this.photosBindingSource.DataMember = "Photos";
+            this.photosBindingSource.DataSource = this.albumBindingSource;
             // 
             // UserProfileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(924, 527);
-            this.Controls.Add(this.AlbumCoverPictureBox);
+            this.ClientSize = new System.Drawing.Size(1149, 619);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.AlbumsLabel);
             this.Controls.Add(this.albumListBox);
             this.Controls.Add(this.UpcomingBirthdaysLabel);
@@ -188,7 +250,11 @@ namespace BasicFacebookFeatures
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "UserProfileForm";
             ((System.ComponentModel.ISupportInitialize)(this.ProfilePicture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AlbumCoverPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.albumBindingSource)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imageAlbumPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.photosBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,6 +273,10 @@ namespace BasicFacebookFeatures
         private System.Windows.Forms.Label UpcomingBirthdaysLabel;
         private System.Windows.Forms.ListBox albumListBox;
         private System.Windows.Forms.Label AlbumsLabel;
-        private System.Windows.Forms.PictureBox AlbumCoverPictureBox;
+        private System.Windows.Forms.BindingSource albumBindingSource;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox imageAlbumPictureBox;
+        private System.Windows.Forms.TextBox nameTextBox;
+        private System.Windows.Forms.BindingSource photosBindingSource;
     }
 }

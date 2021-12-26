@@ -28,8 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label messageLabel;
             this.postMessage = new System.Windows.Forms.ListBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.postBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.monthsChartPosts = new System.Windows.Forms.Button();
             this.yearChartPost = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -37,10 +39,26 @@
             this.ascending = new System.Windows.Forms.RadioButton();
             this.descendingSorted = new System.Windows.Forms.RadioButton();
             this.SortOrderMessage = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.messageTextBox = new System.Windows.Forms.TextBox();
+            messageLabel = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // messageLabel
+            // 
+            messageLabel.AutoSize = true;
+            messageLabel.Location = new System.Drawing.Point(14, 38);
+            messageLabel.Name = "messageLabel";
+            messageLabel.Size = new System.Drawing.Size(78, 20);
+            messageLabel.TabIndex = 0;
+            messageLabel.Text = "Message:";
             // 
             // postMessage
             // 
+            this.postMessage.DataSource = this.postBindingSource;
+            this.postMessage.DisplayMember = "Message";
             this.postMessage.FormattingEnabled = true;
             this.postMessage.ItemHeight = 20;
             this.postMessage.Location = new System.Drawing.Point(23, 147);
@@ -48,6 +66,10 @@
             this.postMessage.Size = new System.Drawing.Size(820, 324);
             this.postMessage.TabIndex = 0;
             this.postMessage.SelectedIndexChanged += new System.EventHandler(this.postMessage_SelectedIndexChanged);
+            // 
+            // postBindingSource
+            // 
+            this.postBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Post);
             // 
             // monthsChartPosts
             // 
@@ -128,12 +150,30 @@
             this.SortOrderMessage.Text = "Want to see your posts ordered by the number of comments?\r\n                      " +
     "Choose which order to be displayed ";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(messageLabel);
+            this.panel1.Controls.Add(this.messageTextBox);
+            this.panel1.Location = new System.Drawing.Point(849, 136);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(306, 168);
+            this.panel1.TabIndex = 11;
+            // 
+            // messageTextBox
+            // 
+            this.messageTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "Message", true));
+            this.messageTextBox.Location = new System.Drawing.Point(3, 81);
+            this.messageTextBox.Name = "messageTextBox";
+            this.messageTextBox.Size = new System.Drawing.Size(291, 26);
+            this.messageTextBox.TabIndex = 1;
+            // 
             // PostRankForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(888, 592);
+            this.ClientSize = new System.Drawing.Size(1155, 606);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.SortOrderMessage);
             this.Controls.Add(this.descendingSorted);
             this.Controls.Add(this.ascending);
@@ -145,6 +185,9 @@
             this.Name = "PostRankForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "PostRankForm";
+            ((System.ComponentModel.ISupportInitialize)(this.postBindingSource)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,7 +196,6 @@
         #endregion
 
         private System.Windows.Forms.ListBox postMessage;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button monthsChartPosts;
         private System.Windows.Forms.Button yearChartPost;
         private System.Windows.Forms.TextBox textBox1;
@@ -161,5 +203,8 @@
         private System.Windows.Forms.RadioButton ascending;
         private System.Windows.Forms.RadioButton descendingSorted;
         private System.Windows.Forms.Label SortOrderMessage;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.BindingSource postBindingSource;
+        private System.Windows.Forms.TextBox messageTextBox;
     }
 }

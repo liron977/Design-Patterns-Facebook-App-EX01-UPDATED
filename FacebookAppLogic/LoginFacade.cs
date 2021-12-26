@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FacebookAppLogic
+﻿namespace FacebookAppLogic
 {
     public class LoginFacade
     {
@@ -19,7 +13,5 @@ namespace FacebookAppLogic
         {
             r_AppManager.UserLogin();
         }
-
-
     }
 }

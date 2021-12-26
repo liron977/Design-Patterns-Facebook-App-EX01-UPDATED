@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
-using System.Threading;
+
 
 namespace FacebookAppLogic
 {
     public class FriendLogic
     {
         public User Friend { get; set; }
+
         private const string k_MessageNoData = "No Data to retrieve";
+
         public int NumOfLikes { get; set; }
 
         public FriendLogic()
         {
-            
             NumOfLikes = 0;
         }
+
         public string FetchPicture()
         {
             return Friend.PictureNormalURL;
@@ -29,6 +27,7 @@ namespace FacebookAppLogic
         {
             return Friend.Birthday;
         }
+
         public string FetchUserName()
         {
             return Friend.Name;
@@ -60,10 +59,9 @@ namespace FacebookAppLogic
 
             try
             {
-               
-                    foreach (Album album in Friend.Albums)
+                foreach(Album album in Friend.Albums)
                 {
-                    foreach (Photo photo in album.Photos)
+                    foreach(Photo photo in album.Photos)
                     {
                         photoList.Add(photo);
                     }
@@ -84,7 +82,7 @@ namespace FacebookAppLogic
 
             try
             {
-                foreach (Page page in Friend.LikedPages)
+                foreach(Page page in Friend.LikedPages)
                 {
                     likedPages.Add(page);
                 }
@@ -97,5 +95,4 @@ namespace FacebookAppLogic
             return likedPages;
         }
     }
-
 }

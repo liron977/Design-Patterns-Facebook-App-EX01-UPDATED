@@ -9,7 +9,7 @@ namespace BasicFacebookFeatures
     internal partial class UserProfileForm : Form
     {
       
-        private UserProfileFacade m_ProfileFacade = new UserProfileFacade();
+        private readonly UserProfileFacade r_ProfileFacade = new UserProfileFacade();
 
         private const string k_MessageSomethingWrong = "Something wrong. Try later";
         private const string k_MessageNoData = "No data to show";
@@ -28,7 +28,7 @@ namespace BasicFacebookFeatures
         }
         protected void fetchInfo()
         {
-          ProfilePicture.Load(m_ProfileFacade.GetPicture());
+          ProfilePicture.Load(r_ProfileFacade.GetPicture());
             new Thread(fetchNewsFeed).Start();
             new Thread(fetchFriends).Start();
             new Thread(fetchUpcomingBirthdays).Start();
@@ -45,7 +45,7 @@ namespace BasicFacebookFeatures
                 }
                 else
                 {
-                    List<string> friendList = m_ProfileFacade.GetUpcomingBirthdays();
+                    List<string> friendList = r_ProfileFacade.GetUpcomingBirthdays();
 
                     foreach(string friendUser in friendList)
                     {
@@ -74,7 +74,7 @@ namespace BasicFacebookFeatures
                 }
                 else
                 {
-                    List<User> friendList = m_ProfileFacade.GetFriends();
+                    List<User> friendList = r_ProfileFacade.GetFriends();
 
                     foreach(User friendUser in friendList)
                     {
@@ -98,7 +98,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                List<string> userPosts = m_ProfileFacade.GetNewsFeed();
+                List<string> userPosts = r_ProfileFacade.GetNewsFeed();
 
                 foreach(string post in userPosts)
                 {
@@ -138,7 +138,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                List<Album> userAlbums = m_ProfileFacade.GetAlbums();
+                /*List<Album> userAlbums = m_ProfileFacade.GetAlbums();
 
                 foreach(Album album in userAlbums)
                 {
@@ -148,7 +148,9 @@ namespace BasicFacebookFeatures
                 if(albumListBox.Items.Count == 0)
                 {
                     albumListBox.Invoke(new Action(() => albumListBox.Items.Add(k_MessageNoData)));
-                }
+                }*/
+                List<Album> userAlbums = r_ProfileFacade.GetAlbums();
+                albumBindingSource.DataSource = userAlbums;
             }
             catch(Exception ex)
             {
@@ -157,12 +159,12 @@ namespace BasicFacebookFeatures
         }
 
 
-        private void albumListBox_SelectedIndexChanged(object sender, EventArgs e)
+       /* private void albumListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(albumListBox.SelectedItems.Count == 1)
+            if (albumListBox.SelectedItems.Count == 1)
             {
                 Album selectedAlbum = albumListBox.SelectedItem as Album;
-                if(selectedAlbum != null && selectedAlbum.PictureAlbumURL != null)
+                if (selectedAlbum != null && selectedAlbum.PictureAlbumURL != null)
                 {
                     AlbumCoverPictureBox.LoadAsync(selectedAlbum.PictureAlbumURL);
                 }
@@ -170,8 +172,11 @@ namespace BasicFacebookFeatures
                 {
                     AlbumCoverPictureBox.Image = AlbumCoverPictureBox.ErrorImage;
                 }
+
             }
-        }
+            
+
+        }*/
 
         private void postStatusButton_Click_1(object sender, EventArgs e)
         {
@@ -179,7 +184,7 @@ namespace BasicFacebookFeatures
             {
                 if(!(string.IsNullOrEmpty(PostStatusTextBox.Text)))
                 {
-                    Status postedStatus = m_ProfileFacade.PostStatus(PostStatusTextBox.Text);
+                    Status postedStatus = r_ProfileFacade.PostStatus(PostStatusTextBox.Text);
                     MessageBox.Show(k_MessageStatusPosted);
                 }
                 else
@@ -191,6 +196,16 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show(k_MessageSomethingWrong);
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void AlbumCoverPictureBox_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

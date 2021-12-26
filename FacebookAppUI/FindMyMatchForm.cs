@@ -9,14 +9,14 @@ namespace BasicFacebookFeatures
 {
     internal partial class FindMyMatchForm : Form
     {
-        private MyMatchFacade m_MyMatchFacade = new MyMatchFacade();
+        private readonly MyMatchFacade r_MyMatchFacade = new MyMatchFacade();
 
         private const string k_MessageNoMatches = "No matches to retrieve";
        
 
         public FindMyMatchForm(List<FriendLogic> i_FriendsList)
         {
-            m_MyMatchFacade.updateMatchsList(i_FriendsList);
+            r_MyMatchFacade.UpdateMatchesList(i_FriendsList);
             InitializeComponent();
         }
 
@@ -31,12 +31,12 @@ namespace BasicFacebookFeatures
         private void fetchFan()
         {
             
-            if(m_MyMatchFacade.GetMyMatchs().Count > 0)
+            if(r_MyMatchFacade.GetMyMatchs().Count > 0)
             {
                 try
                 {
                  
-                        User myFan = m_MyMatchFacade.GetMyFan();
+                        User myFan = r_MyMatchFacade.GetMyFan();
                  
                     FriendWhoLoveMePictureBox.Invoke(new Action(() => FriendWhoLoveMePictureBox.Load(myFan.PictureNormalURL)));
                     FriendWhoLoveMeLabel.Invoke(new Action(() => FriendWhoLoveMeLabel.Text = myFan.Name));
@@ -54,7 +54,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                foreach(string matchInfo in m_MyMatchFacade.GetMyMatchesInfo())
+                foreach(string matchInfo in r_MyMatchFacade.GetMyMatchesInfo())
                 {
                     recommendedMatchesListBox.Invoke(new Action(() => recommendedMatchesListBox.Items.Add(matchInfo)));
                   
@@ -82,11 +82,11 @@ namespace BasicFacebookFeatures
             {
                 MyMatchForm myMatch = new MyMatchForm();
                 int matchNameIndex
-             = m_MyMatchFacade.GetSelectedMatchIndex(
+             = r_MyMatchFacade.GetSelectedMatchIndex(
                   recommendedMatchesListBox.SelectedItem.ToString(),
                   recommendedMatchesListBox.SelectedIndex);
 
-               myMatch.m_FriendFacade.FriendLogic.Friend = m_MyMatchFacade.GetSelectedMatch(recommendedMatchesListBox.Items[matchNameIndex].ToString());
+               myMatch.m_FriendFacade.FriendLogic.Friend = r_MyMatchFacade.GetSelectedMatch(recommendedMatchesListBox.Items[matchNameIndex].ToString());
                myMatch.Show();
             }
         }

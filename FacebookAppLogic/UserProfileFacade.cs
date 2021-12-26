@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FacebookWrapper;
+﻿using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
@@ -21,10 +16,12 @@ namespace FacebookAppLogic
         {
             return r_AppManager.FetchPicture();
         }
+
         public List<string> GetNewsFeed()
         {
             return r_AppManager.FetchNewsFeed();
         }
+
         public List<User> GetFriends()
         {
             return r_AppManager.FetchFriendsList();
@@ -48,12 +45,11 @@ namespace FacebookAppLogic
         public void PostAndTag(User i_User, string i_Message)
         {
             r_AppManager.PostAndTag(i_User, i_Message);
-
         }
+
         public string GetUserName()
         {
             return r_AppManager.FetchUserName();
-
         }
     }
 }

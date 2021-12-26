@@ -12,23 +12,22 @@ namespace FacebookAppLogic
         private const string k_MessageFailedFetch = "Fetch failed. Please try again.";
         private const string k_MessageNoData = "No Data to retrieve";
         private const int k_RangeDaysUpcomingBirthdays = 3;
-        private static FacebookAppManager s_Instance = null;
+        private static FacebookAppManager s_Instance;
         private static readonly object sr_FacebookAppManagerLock = new object();
 
         private FacebookAppManager()
         {
-
         }
 
         public static FacebookAppManager Instance
         {
             get
             {
-                if (s_Instance == null)
+                if(s_Instance == null)
                 {
-                    lock (sr_FacebookAppManagerLock)
+                    lock(sr_FacebookAppManagerLock)
                     {
-                        if (s_Instance == null)
+                        if(s_Instance == null)
                         {
                             s_Instance = new FacebookAppManager();
                         }
@@ -49,17 +48,7 @@ namespace FacebookAppLogic
                 m_LoggedInUser = value;
             }
         }
-        public LoginResult LoginResult
-        {
-            get
-            {
-                return m_LoginResult;
-            }
-            set
-            {
-                m_LoginResult = value;
-            }
-        }
+
 
         public string FetchPicture()
         {
@@ -85,25 +74,22 @@ namespace FacebookAppLogic
                 "user_posts",
                 "user_videos");
 
-            m_LoginResult = FacebookWrapper.FacebookService.Connect("EAAMRrZBhZBBeABAAf3mGAZBSZAmq4wLITXmbz0XwHZAZCKu9IWUE1kk185K9xD2br3S8ZBvPMPqFrM7TZAGFETvMVZC1sy9cBpup8pdgiOuPiG59G2dZCIBbUl3nrIXaWQgJjjlo2wk2vmkqYptL8cxw5OprMkh3b1VpJ7ZCyj2SVhQZBT3XAmc7W0NDZBoTQkv8dj0Y3P6ZBPGdeVxWr14fkyABaG");
+            m_LoginResult = FacebookService.Connect(
+                "EAAMRrZBhZBBeABAAf3mGAZBSZAmq4wLITXmbz0XwHZAZCKu9IWUE1kk185K9xD2br3S8ZBvPMPqFrM7TZAGFETvMVZC1sy9cBpup8pdgiOuPiG59G2dZCIBbUl3nrIXaWQgJjjlo2wk2vmkqYptL8cxw5OprMkh3b1VpJ7ZCyj2SVhQZBT3XAmc7W0NDZBoTQkv8dj0Y3P6ZBPGdeVxWr14fkyABaG");
             //m_LoginResult = FacebookWrapper.FacebookService.Connect(
             //"EAAMRrZBhZBBeABAAf3mGAZBSZAmq4wLITXmbz0XwHZAZCKu9IWUE1kk185K9xD2br3S8ZBvPMPqFrM7TZAGFETvMVZC1sy9cBpup8pdgiOuPiG59G2dZCIBbUl3nrIXaWQgJjjlo2wk2vmkqYptL8cxw5OprMkh3b1VpJ7ZCyj2SVhQZBT3XAmc7W0NDZBoTQkv8dj0Y3P6ZBPGdeVxWr14fkyABaG");
 
             //m_LoginResult = FacebookWrapper.FacebookService.Connect("EAAMRrZBhZBBeABABaCfGQXZC7RvKG5YRsacaNfGZATvFxnQeNKBagzATVmI0o2ROLtIsZCgqnJLXR3T0ZAS0KISGnj5hkLSuEwbrLImFodqmXQsrG4rPXZCZAd10Mj3eGaIsup3wLcsJovRJaZAfZAKSf5BiPZBqqavBeyA2iEsSdKM5xs2STGU31j0wRE0yGFsaURmfgVNFuuW6Dk5y6M9uTGB");
-/*            m_LoginResult = FacebookWrapper.FacebookService.Connect(
-                "EAAMRrZBhZBBeABACgEZChie2ZCCgvrp8xRABOCI16YVQ59xv4mpauBuZAo701hVcPy8oAvjc56jD4BJesszvVdJZChgGuwOgSfnpwVgLxDDlRz8wHfXKmVPAyMk9RZAHPIpZAEY2Tx04aXsZAPoZCnvBDfxlJqsMFO2XAt3ZCezZCbks8x7VleqCohkG");*/
+            /*            m_LoginResult = FacebookWrapper.FacebookService.Connect(
+                            "EAAMRrZBhZBBeABACgEZChie2ZCCgvrp8xRABOCI16YVQ59xv4mpauBuZAo701hVcPy8oAvjc56jD4BJesszvVdJZChgGuwOgSfnpwVgLxDDlRz8wHfXKmVPAyMk9RZAHPIpZAEY2Tx04aXsZAPoZCnvBDfxlJqsMFO2XAt3ZCezZCbks8x7VleqCohkG");*/
             m_LoggedInUser = m_LoginResult.LoggedInUser;
 
-           /* if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
-            {
-                m_LoggedInUser = m_LoginResult.LoggedInUser;
-            }*/
+            /* if (!string.IsNullOrEmpty(m_LoginResult.AccessToken))
+             {
+                 m_LoggedInUser = m_LoginResult.LoggedInUser;
+             }*/
         }
 
-        public string FetchUserGender()
-        {
-            return LoggedInUser.Gender.ToString();
-        }
 
         public void PostAndTag(User i_User, string i_Message)
         {
@@ -115,25 +101,6 @@ namespace FacebookAppLogic
             return LoggedInUser.Name;
         }
 
-        public string FetchUserLocation()
-        {
-            return LoggedInUser.Location.Name;
-        }
-
-        public string FetchUserBirthday()
-        {
-            return LoggedInUser.Birthday;
-        }
-
-        public int FetchUserAge()
-        {
-            int theYearToday = int.Parse(DateTime.Now.Date.Year.ToString());
-            string userYearOfBirth = LoggedInUser.Birthday.Substring(6, 4);
-            int userYearOfBirthNumber = int.Parse(userYearOfBirth);
-            int userAge = theYearToday - userYearOfBirthNumber;
-
-            return userAge;
-        }
 
         public Status PostStatus(string i_UserStatusText)
         {
@@ -240,70 +207,6 @@ namespace FacebookAppLogic
             }
 
             return albums;
-        }
-
-        public List<Photo> FetchPictures()
-        {
-            List<Photo> photoList = new List<Photo>();
-
-            try
-            {
-                foreach(Album album in m_LoggedInUser.Albums)
-                {
-                    foreach(Photo photo in album.Photos)
-                    {
-                        photoList.Add(photo);
-                    }
-                }
-            }
-            catch
-            {
-                throw new Exception(k_MessageNoData);
-            }
-
-            return photoList;
-        }
-
-        public List<Page> FetchLikedPages()
-        {
-            List<Page> likedPages = new List<Page>();
-
-            try
-            {
-                foreach (Page page in m_LoggedInUser.LikedPages)
-                {
-                    likedPages.Add(page);
-                }
-            }
-            catch
-            {
-                throw new Exception(k_MessageNoData);
-            }
-
-            return likedPages;
-        }
-
-        
-
-        public User FindSelectedFriend(string i_UserFriendName)
-        {
-            User userFriend = new User();
-            try
-            {
-                foreach(User friend in LoggedInUser.Friends)
-                {
-                    if(string.Compare(friend.Name, i_UserFriendName) == 0)
-                    {
-                        userFriend = friend;
-                    }
-                }
-            }
-            catch
-            {
-                throw new Exception(k_MessageFailedFetch);
-            }
-
-            return userFriend;
         }
     }
 }

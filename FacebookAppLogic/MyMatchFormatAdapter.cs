@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FacebookWrapper.ObjectModel;
-using FacebookAppLogic;
+
 namespace FacebookAppLogic
 {
-    class MyMatchFormatAdapter:IMyMatchFormat
+    class MyMatchFormatAdapter : IMyMatchFormat
     {
         private readonly User r_FriendUser;
         private readonly int r_CurrentYear;
@@ -24,17 +21,17 @@ namespace FacebookAppLogic
             {
                 List<string> matchesInfo = new List<string>();
                 int yearOfBirth = int.Parse(r_FriendUser.Birthday.Substring(6, 4));
-
-
+                string friendLocation = r_FriendUser.Location.ToString();
+                friendLocation = friendLocation.Replace("(location: )", "");
                 matchesInfo.Add(string.Format($@"Name: {r_FriendUser.Name}"));
                 matchesInfo.Add(string.Format($@"Age: {r_CurrentYear - yearOfBirth}"));
-                matchesInfo.Add(string.Format($@"Location: {r_FriendUser.Location}"));
-                
+                matchesInfo.Add(string.Format($@"Location: {friendLocation}"));
+
                 matchesInfo.Add(drawLine());
 
                 return matchesInfo;
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 throw new Exception("Error: Couldn't fetch information");
             }
@@ -44,6 +41,5 @@ namespace FacebookAppLogic
         {
             return @"-------------------------------------------------------------------------";
         }
-
     }
 }

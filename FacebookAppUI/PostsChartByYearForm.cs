@@ -8,14 +8,14 @@ namespace BasicFacebookFeatures
 {
     internal partial class PostsChartByYearForm : Form
     {
-        private PostRankFacade m_AppPostsFacade = new PostRankFacade();
+        private readonly PostRankFacade r_AppPostsFacade = new PostRankFacade();
 
         
         public const int k_Millennium = 2000;
 
         public PostsChartByYearForm(PostRankFacade i_AppPostsFacade)
         {
-            m_AppPostsFacade = i_AppPostsFacade;
+            r_AppPostsFacade = i_AppPostsFacade;
             InitializeComponent();
         }
 
@@ -28,13 +28,13 @@ namespace BasicFacebookFeatures
 
         private void displayedCommentsChartOrderedByYear()
         {
-            int currentYear = m_AppPostsFacade.GetCurrentYear();
+            int currentYear = r_AppPostsFacade.GetCurrentYear();
 
             for (int i = 1; i < currentYear; i++)
             {
                 commentsChart.Series["Posts"].Points.AddXY(
                     i + k_Millennium,
-                    m_AppPostsFacade.GetUserPostsOrderedByYear(i));
+                    r_AppPostsFacade.GetUserPostsOrderedByYear(i));
             }
         }
     }

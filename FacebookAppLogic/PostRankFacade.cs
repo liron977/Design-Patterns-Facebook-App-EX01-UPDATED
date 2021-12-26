@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FacebookWrapper;
+﻿using System.Collections.Generic;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
@@ -17,12 +12,13 @@ namespace FacebookAppLogic
             return r_PostRank.UserPosts;
         }
 
-        public void initPostsInfo()
+        public void InitPostsInfo()
         {
-            r_PostRank.initUserPostsOrderedByMonthList();
-            r_PostRank.initUserPostsOrderedByYearList();
-            r_PostRank.initPostsList();
+            r_PostRank.InitUserPostsOrderedByMonthList();
+            r_PostRank.InitUserPostsOrderedByYearList();
+            r_PostRank.InitPostsList();
         }
+
         public Post GetTheMostPopularPostByComments()
         {
             return r_PostRank.TheMostPopularPostByComments();
@@ -37,7 +33,7 @@ namespace FacebookAppLogic
         {
             return r_PostRank.CurrentYear;
         }
-        
+
         public int GetUserPostsOrderedByMonth(int i_Index)
         {
             return r_PostRank.UserPostsOrderedByMonth[i_Index].Count;
@@ -47,9 +43,5 @@ namespace FacebookAppLogic
         {
             return r_PostRank.UserPostsOrderedByYear[i_Index].Count;
         }
-
-
-
-
     }
 }

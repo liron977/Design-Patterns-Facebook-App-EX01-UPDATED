@@ -11,7 +11,7 @@ namespace BasicFacebookFeatures
 {
     internal partial class PostRankForm : Form
     {
-        private PostRankFacade m_AppPostsFacade=new PostRankFacade();
+        private readonly PostRankFacade r_AppPostsFacade=new PostRankFacade();
         private Dictionary<Post, int> m_UserPosts;
         private const string k_ErrorMessage = "No posts to retrieve";
         private const string k_ErrorCantDisplayInfo = "Sorry we can`t displayed information on this post";
@@ -27,7 +27,7 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                Post thePopularPostByComments = m_AppPostsFacade.GetTheMostPopularPostByComments();
+                Post thePopularPostByComments = r_AppPostsFacade.GetTheMostPopularPostByComments();
 
                 textBox1.Text = thePopularPostByComments.Message;
             }
@@ -40,35 +40,35 @@ namespace BasicFacebookFeatures
 
         private void monthsChartPosts_Click(object sender, EventArgs e)
         {
-            PostsChartByMonthsForm commentsChartByMonths = new PostsChartByMonthsForm(m_AppPostsFacade);
+            PostsChartByMonthsForm commentsChartByMonths = new PostsChartByMonthsForm(r_AppPostsFacade);
             commentsChartByMonths.Show();
         }
 
         private void yearChartPost_Click(object sender, EventArgs e)
         {
-            PostsChartByYearForm commentsChartByYear = new PostsChartByYearForm(m_AppPostsFacade);
+            PostsChartByYearForm commentsChartByYear = new PostsChartByYearForm(r_AppPostsFacade);
             commentsChartByYear.Show();
         }
 
         protected override void OnShown(EventArgs e)
         {
             changeButtonStatus(false);
-            m_AppPostsFacade.initPostsInfo();
+            r_AppPostsFacade.InitPostsInfo();
             fetchInfo();
             changeButtonStatus(true);
         }
         private void fetchInfo()
         {
-            m_UserPosts = m_AppPostsFacade.GetUserPosts();
+            m_UserPosts = r_AppPostsFacade.GetUserPosts();
             displayedPostCommentsRank();
         }
 
-        private void changeButtonStatus(bool i_EnableBotton)
+        private void changeButtonStatus(bool i_EnableButton)
         {
-            monthsChartPosts.Enabled = i_EnableBotton;
-            yearChartPost.Enabled = i_EnableBotton;
-            ascending.Enabled = i_EnableBotton;
-            descendingSorted.Enabled = i_EnableBotton;
+            monthsChartPosts.Enabled = i_EnableButton;
+            yearChartPost.Enabled = i_EnableButton;
+            ascending.Enabled = i_EnableButton;
+            descendingSorted.Enabled = i_EnableButton;
 
         }
         private void ascending_CheckedChanged(object sender, EventArgs e)
@@ -79,21 +79,24 @@ namespace BasicFacebookFeatures
         private void ascendingInfo()
         {
             descendingSorted.Enabled = true;
-            postMessage.Items.Clear();
-
+            //postMessage.Items.Clear();
+            List<Post> ascendingSortedPosts = new List<Post>();
             try
             {
-                m_UserPosts = m_AppPostsFacade.GetUserPosts();
+               // m_UserPosts = r_AppPostsFacade.GetUserPosts();
                 var ascendingSort = from objDict in m_UserPosts orderby objDict.Value select objDict;
                 foreach (KeyValuePair<Post, int> kvp in ascendingSort)
                 {
-                    postMessage.Invoke(new Action(() => postMessage.Items.Add(kvp.Key)));
+                   if(kvp.Key.Message!=""&& kvp.Key.Message != null)
+                   {ascendingSortedPosts.Add(kvp.Key);}
+                    
                 }
 
-                if (postMessage.Items.Count == 0)
+                /*if (postMessage.Items.Count == 0)
                 {
                     postMessage.Invoke(new Action(() => postMessage.Items.Add(k_ErrorMessage)));
-                }
+                }*/
+                postBindingSource.DataSource = ascendingSortedPosts;
             }
             catch (Exception ex)
             {
@@ -106,20 +109,30 @@ namespace BasicFacebookFeatures
 
         private void descendingSortedInfo()
         {
-            postMessage.Invoke(new Action(() => postMessage.Items.Clear()));
+            List<Post> descendingSortedPosts = new List<Post>();
+
+            // postMessage.Invoke(new Action(() => postMessage.Items.Clear()));
             ascending.Enabled = true;
             var dictSort = from objDict in m_UserPosts orderby objDict.Value descending select objDict;
             try
             {
+
                 foreach (KeyValuePair<Post, int> kvp in dictSort)
                 {
-                    postMessage.Invoke(new Action(() => postMessage.Items.Add(kvp.Key)));
-                }
+                    if (kvp.Key.Message != "" && kvp.Key.Message != null)
+                    { descendingSortedPosts.Add(kvp.Key); }
 
-                if (postMessage.Items.Count == 0)
-                {
-                    postMessage.Invoke(new Action(() => postMessage.Items.Add(k_ErrorMessage)));
                 }
+                /* foreach (KeyValuePair<Post, int> kvp in dictSort)
+                 {
+                     postMessage.Invoke(new Action(() => postMessage.Items.Add(kvp.Key)));
+                 }
+
+                 if (postMessage.Items.Count == 0)
+                 {
+                     postMessage.Invoke(new Action(() => postMessage.Items.Add(k_ErrorMessage)));
+                 }*/
+                postBindingSource.DataSource = dictSort;
             }
             catch (Exception ex)
             {
@@ -149,6 +162,21 @@ namespace BasicFacebookFeatures
                     MessageBox.Show(k_ErrorCantDisplayInfo);
                 }
             }
+        }
+
+        private void messageLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void messageTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+
         }
     }
 }

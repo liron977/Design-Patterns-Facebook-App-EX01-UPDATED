@@ -8,7 +8,7 @@ namespace BasicFacebookFeatures
 {
     internal partial class FacebookAppForm : Form
     {
-       private UserProfileFacade m_ProfileFacade = new UserProfileFacade();
+       private readonly UserProfileFacade r_ProfileFacade = new UserProfileFacade();
         private const string k_MessageLogout = " are you sure you want to log out from this app?";
 
        
@@ -19,7 +19,7 @@ namespace BasicFacebookFeatures
 
         protected override void OnShown(EventArgs e)
         {
-            ProfilePicture.Load(m_ProfileFacade.GetPicture());
+            ProfilePicture.Load(r_ProfileFacade.GetPicture());
         }
 
         private void profilePageButton_Click(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace BasicFacebookFeatures
 
         private void activateLogout()
         {
-            string userName = m_ProfileFacade.GetUserName();
+            string userName = r_ProfileFacade.GetUserName();
             DialogResult dialogResult = MessageBox.Show(userName + k_MessageLogout, "", MessageBoxButtons.YesNo);
 
             if(dialogResult == DialogResult.Yes)

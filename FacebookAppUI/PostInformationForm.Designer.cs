@@ -115,7 +115,7 @@ namespace BasicFacebookFeatures
             // 
             // postTextBox
             // 
-            this.postTextBox.Location = new System.Drawing.Point(534, 23);
+            this.postTextBox.Location = new System.Drawing.Point(535, 23);
             this.postTextBox.Multiline = true;
             this.postTextBox.Name = "postTextBox";
             this.postTextBox.Size = new System.Drawing.Size(379, 151);
@@ -126,7 +126,7 @@ namespace BasicFacebookFeatures
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(1209, 567);
+            this.ClientSize = new System.Drawing.Size(952, 343);
             this.Controls.Add(shareYouPostButton);
             this.Controls.Add(this.postTextBox);
             this.Controls.Add(this.NumberofComments);

@@ -1,9 +1,5 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FacebookWrapper;
 using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
@@ -22,6 +18,7 @@ namespace FacebookAppLogic
                 m_FriendLogic = value;
             }
         }
+
         public string GetPicture()
         {
             return m_FriendLogic.FetchPicture();
@@ -60,10 +57,6 @@ namespace FacebookAppLogic
         public List<Page> GetLikedPages()
         {
             return m_FriendLogic.FetchLikedPages();
-
         }
-
-
-
     }
 }

@@ -1,37 +1,19 @@
 ﻿using FacebookWrapper.ObjectModel;
 using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Threading;
 
 namespace FacebookAppLogic
 {
     public class FindMyMatchLogic
     {
         public readonly List<FriendLogic> r_FriendsList = new List<FriendLogic>();
-        private readonly FacebookAppManager m_AppManager = FacebookAppManager.Instance;
+        private readonly FacebookAppManager r_AppManager = FacebookAppManager.Instance;
         private const string k_MessageFailedFetch = "Fetch failed. Please try again.";
-        private static readonly object sr_FacebookAppManagerLock = new object();
 
-     /*   public List<string> FetchMyMatchesInfo()
+
+        public int GetNameIndex(string i_SelectedItem, int i_SelectedIndex)
         {
-
-            List<string> matchesByFormat = new List<string>();
-
-            foreach (FriendLogic friend in r_FriendsList)
-            {
-                IMyMatchFormat iMatchesFormat = new MyMatchFormatAdapter(friend.Friend);
-                matchesByFormat.AddRange(iMatchesFormat.CreateFormattedMatchesList());
-
-            }
-
-            return matchesByFormat;
-        }*/
-
-        public int GetNameIndex(string i_Selected_item, int i_SelectedIndex)
-        {
-
-            switch(i_Selected_item[0])
+            switch(i_SelectedItem[0])
             {
                 case '-':
                     return i_SelectedIndex - 3;
@@ -51,9 +33,9 @@ namespace FacebookAppLogic
             i_UserFriendName = i_UserFriendName.Substring(6);
             try
             {
-                foreach (FriendLogic friend in r_FriendsList)
+                foreach(FriendLogic friend in r_FriendsList)
                 {
-                    if (string.Compare(friend.Friend.Name, i_UserFriendName) == 0)
+                    if(string.Compare(friend.Friend.Name, i_UserFriendName) == 0)
                     {
                         userFriend = friend.Friend;
                     }
@@ -66,17 +48,18 @@ namespace FacebookAppLogic
 
             return userFriend;
         }
+
         public void UpdateFriendList(List<FriendLogic> i_FriendsList)
         {
-
-            foreach (FriendLogic friend in i_FriendsList)
+            foreach(FriendLogic friend in i_FriendsList)
             {
                 r_FriendsList.Add(friend);
             }
         }
+
         public void FilterByGender(User.eGender i_GenderToFilter)
         {
-            foreach(User friend in m_AppManager.LoggedInUser.Friends)
+            foreach(User friend in r_AppManager.LoggedInUser.Friends)
             {
                 if(friend.Gender == i_GenderToFilter)
                 {
@@ -86,7 +69,7 @@ namespace FacebookAppLogic
                 }
             }
         }
-        
+
         public List<FriendLogic> FilterMyMatch(int i_FromAge, int i_ToAge, User.eGender i_GenderToFilter)
         {
             FilterByGender(i_GenderToFilter);
@@ -117,8 +100,8 @@ namespace FacebookAppLogic
 
         public User FindMyFan()
         {
-            FriendLogic fan=new FriendLogic();
-                fan.Friend= r_FriendsList[0].Friend;
+            FriendLogic fan = new FriendLogic();
+            fan.Friend = r_FriendsList[0].Friend;
 
             updateLikesPerFriend();
             try
@@ -135,7 +118,7 @@ namespace FacebookAppLogic
             {
                 throw new Exception(k_MessageFailedFetch);
             }
-       
+
             return fan.Friend;
         }
 
@@ -143,9 +126,7 @@ namespace FacebookAppLogic
         {
             try
             {
-              
-                
-                foreach (Post postOfUser in m_AppManager.m_LoggedInUser.Posts)
+                foreach(Post postOfUser in r_AppManager.m_LoggedInUser.Posts)
                 {
                     foreach(User friend in postOfUser.LikedBy)
                     {
