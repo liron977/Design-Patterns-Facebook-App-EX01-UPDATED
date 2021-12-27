@@ -77,11 +77,10 @@ namespace BasicFacebookFeatures
         private void ascendingInfo()
         {
             descendingSorted.Enabled = true;
-            //postMessage.Items.Clear();
+
             List<Post> ascendingSortedPosts = new List<Post>();
             try
             {
-                // m_UserPosts = r_AppPostsFacade.GetUserPosts();
                 var ascendingSort = from objDict in m_UserPosts orderby objDict.Value select objDict;
                 foreach(KeyValuePair<Post, int> kvp in ascendingSort)
                 {
@@ -91,10 +90,6 @@ namespace BasicFacebookFeatures
                     }
                 }
 
-                /*if (postMessage.Items.Count == 0)
-                {
-                    postMessage.Invoke(new Action(() => postMessage.Items.Add(k_ErrorMessage)));
-                }*/
                 postBindingSource.DataSource = ascendingSortedPosts;
             }
             catch(Exception ex)
@@ -110,7 +105,6 @@ namespace BasicFacebookFeatures
         {
             List<Post> descendingSortedPosts = new List<Post>();
 
-            // postMessage.Invoke(new Action(() => postMessage.Items.Clear()));
             ascending.Enabled = true;
             var dictSort = from objDict in m_UserPosts orderby objDict.Value descending select objDict;
             try
@@ -123,16 +117,7 @@ namespace BasicFacebookFeatures
                     }
                 }
 
-                /* foreach (KeyValuePair<Post, int> kvp in dictSort)
-                 {
-                     postMessage.Invoke(new Action(() => postMessage.Items.Add(kvp.Key)));
-                 }
-
-                 if (postMessage.Items.Count == 0)
-                 {
-                     postMessage.Invoke(new Action(() => postMessage.Items.Add(k_ErrorMessage)));
-                 }*/
-                postBindingSource.DataSource = dictSort;
+                postBindingSource.DataSource = descendingSortedPosts;
             }
             catch(Exception ex)
             {
@@ -164,6 +149,5 @@ namespace BasicFacebookFeatures
                 }
             }
         }
-
     }
 }

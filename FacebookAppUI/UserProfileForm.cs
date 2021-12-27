@@ -139,17 +139,6 @@ namespace BasicFacebookFeatures
         {
             try
             {
-                /*List<Album> userAlbums = m_ProfileFacade.GetAlbums();
-
-                foreach(Album album in userAlbums)
-                {
-                    albumListBox.Invoke(new Action(() => albumListBox.Items.Add(album)));
-                }
-
-                if(albumListBox.Items.Count == 0)
-                {
-                    albumListBox.Invoke(new Action(() => albumListBox.Items.Add(k_MessageNoData)));
-                }*/
                 List<Album> userAlbums = r_ProfileFacade.GetAlbums();
                 albumBindingSource.DataSource = userAlbums;
             }
@@ -158,26 +147,6 @@ namespace BasicFacebookFeatures
                 MessageBox.Show(ex.Message);
             }
         }
-
-
-        /* private void albumListBox_SelectedIndexChanged(object sender, EventArgs e)
-         {
-             if (albumListBox.SelectedItems.Count == 1)
-             {
-                 Album selectedAlbum = albumListBox.SelectedItem as Album;
-                 if (selectedAlbum != null && selectedAlbum.PictureAlbumURL != null)
-                 {
-                     AlbumCoverPictureBox.LoadAsync(selectedAlbum.PictureAlbumURL);
-                 }
-                 else
-                 {
-                     AlbumCoverPictureBox.Image = AlbumCoverPictureBox.ErrorImage;
-                 }
- 
-             }
-             
- 
-         }*/
 
         private void postStatusButton_Click_1(object i_Sender, EventArgs i_E)
         {

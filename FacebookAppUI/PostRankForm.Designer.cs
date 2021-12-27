@@ -49,11 +49,11 @@
             // messageLabel
             // 
             messageLabel.AutoSize = true;
-            messageLabel.Location = new System.Drawing.Point(14, 38);
+            messageLabel.Location = new System.Drawing.Point(40, 22);
             messageLabel.Name = "messageLabel";
-            messageLabel.Size = new System.Drawing.Size(78, 20);
+            messageLabel.Size = new System.Drawing.Size(197, 40);
             messageLabel.TabIndex = 0;
-            messageLabel.Text = "Message:";
+            messageLabel.Text = "Please choose a post from\r\n the list and edit it here:";
             // 
             // postMessage
             // 
@@ -152,9 +152,10 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.CornflowerBlue;
             this.panel1.Controls.Add(messageLabel);
             this.panel1.Controls.Add(this.messageTextBox);
-            this.panel1.Location = new System.Drawing.Point(849, 136);
+            this.panel1.Location = new System.Drawing.Point(849, 226);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(306, 168);
             this.panel1.TabIndex = 11;
@@ -162,7 +163,7 @@
             // messageTextBox
             // 
             this.messageTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.postBindingSource, "Message", true));
-            this.messageTextBox.Location = new System.Drawing.Point(3, 81);
+            this.messageTextBox.Location = new System.Drawing.Point(9, 104);
             this.messageTextBox.Name = "messageTextBox";
             this.messageTextBox.Size = new System.Drawing.Size(291, 26);
             this.messageTextBox.TabIndex = 1;

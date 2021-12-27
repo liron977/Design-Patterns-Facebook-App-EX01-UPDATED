@@ -4,7 +4,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace FacebookAppLogic
 {
-    class MyMatchFormatAdapter : IMyMatchFormat
+    public class MyMatchFormatAdapter : IMyMatchFormat
     {
         private readonly User r_FriendUser;
         private readonly int r_CurrentYear;

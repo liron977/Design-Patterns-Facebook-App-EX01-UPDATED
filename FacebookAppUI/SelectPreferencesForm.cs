@@ -45,7 +45,7 @@ namespace BasicFacebookFeatures
                 int.Parse(FromNumericUpDown.Value.ToString()),
                 int.Parse(ToNumericUpDown.Value.ToString()),
                 genderSelection);
-            FindMyMatchForm findMyMatchForm = new FindMyMatchForm(r_MyMatchFacade.GetMyMatchs());
+            FindMyMatchForm findMyMatchForm = new FindMyMatchForm(r_MyMatchFacade.GetMyMatches());
             this.Close();
             findMyMatchForm.Show();
         }

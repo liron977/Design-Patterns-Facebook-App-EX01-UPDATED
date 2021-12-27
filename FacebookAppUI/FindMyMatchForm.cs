@@ -28,7 +28,7 @@ namespace BasicFacebookFeatures
 
         private void fetchFan()
         {
-            if(r_MyMatchFacade.GetMyMatchs().Count > 0)
+            if(r_MyMatchFacade.GetMyMatches().Count > 0)
             {
                 try
                 {
