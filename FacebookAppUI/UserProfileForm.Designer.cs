@@ -175,7 +175,6 @@ namespace BasicFacebookFeatures
             this.albumListBox.Name = "albumListBox";
             this.albumListBox.Size = new System.Drawing.Size(276, 124);
             this.albumListBox.TabIndex = 10;
-           // this.albumListBox.SelectedIndexChanged += new System.EventHandler(this.albumListBox_SelectedIndexChanged);
             // 
             // albumBindingSource
             // 
